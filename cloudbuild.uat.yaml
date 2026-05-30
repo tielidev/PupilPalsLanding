@@ -28,7 +28,7 @@ images:
 substitutions:
   _REGION: asia-east1
   _SERVICE: pupil-pals-uat
-  _IMAGE: asia-east1-docker.pkg.dev/$PROJECT_ID/pupil-pals/pupil-pals-uat:$COMMIT_SHA
+  _IMAGE: asia-east1-docker.pkg.dev/${PROJECT_ID}/pupil-pals/pupil-pals-uat:${COMMIT_SHA}
 
 options:
   logging: CLOUD_LOGGING_ONLY
