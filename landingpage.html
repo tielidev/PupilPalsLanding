@@ -122,26 +122,6 @@
     }
     .hero-media img { transition: transform .2s ease; }
     .hero-media:hover img { transform: scale(1.01); }
-    .fixed-frame {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      background: #eef4ff;
-      --frame-scale: 1;
-    }
-    .fixed-frame iframe {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      width: 1920px;
-      height: 1080px;
-      border: 0;
-      display: block;
-      transform-origin: center center;
-      transform: translate(-50%, -50%) scale(var(--frame-scale));
-    }
-
     section { margin-top: 80px; }
 
     .feature-grid {
@@ -224,6 +204,13 @@
       background: #eef4ff;
       border-bottom: 1px solid rgba(13, 28, 46, 0.08);
       overflow: hidden;
+    }
+    .preview-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      background: #eef4ff;
     }
     .preview-card .meta {
       padding: 12px 14px 16px;
@@ -846,20 +833,6 @@
 
   <script>
     (function () {
-      function syncFrameScale() {
-        var frames = document.querySelectorAll('.fixed-frame');
-        for (var i = 0; i < frames.length; i++) {
-          var frame = frames[i];
-          var scaleX = frame.clientWidth / 1920;
-          var scaleY = frame.clientHeight / 1080;
-          var scale = Math.min(scaleX, scaleY);
-          frame.style.setProperty('--frame-scale', String(scale));
-        }
-      }
-
-      window.addEventListener('resize', syncFrameScale);
-      syncFrameScale();
-
       var form = document.getElementById('subscribeForm');
       var emailInput = document.getElementById('email');
       var message = document.getElementById('message');
@@ -888,34 +861,34 @@
         main: {
           heading: 'Main View',
           items: [
-            { title: 'Main Display', desc: 'Classroom overview and live student status', href: 'stitch_ (2)/stitch_/main_display/code.html' }
+            { title: 'Main Display', desc: 'Classroom overview and live student status', img: 'stitch_ (2)/stitch_/main_display/screen.png' }
           ]
         },
         teacher: {
           heading: 'Teacher Hub',
           items: [
-            { title: 'Teacher Dashboard', desc: 'Daily monitoring, tasks, and intervention tracking', href: 'stitch_ (2)/stitch_/teacher_dashboard/code.html' },
-            { title: 'Class Achievements Hub', desc: 'Milestone highlights and collective achievements', href: 'stitch_ (2)/stitch_/class_achievements_hub/code.html' }
+            { title: 'Teacher Dashboard', desc: 'Daily monitoring, tasks, and intervention tracking', img: 'stitch_ (2)/stitch_/teacher_dashboard/screen.png' },
+            { title: 'Class Achievements Hub', desc: 'Milestone highlights and collective achievements', img: 'stitch_ (2)/stitch_/class_achievements_hub/screen.png' }
           ]
         },
         student: {
           heading: 'Student View',
           items: [
-            { title: 'Student Portal', desc: 'Personal goals, rewards, and progress journey', href: 'stitch_ (2)/stitch_/student_portal/code.html' },
-            { title: 'Class Group Photo', desc: 'Community moments and class identity showcase', href: 'stitch_ (2)/stitch_/class_group_photo/code.html' },
-            { title: 'Pet Dressing Room', desc: 'Customization and engagement-based unlocks', href: 'stitch_ (2)/stitch_/pet_dressing_room/code.html' }
+            { title: 'Student Portal', desc: 'Personal goals, rewards, and progress journey', img: 'stitch_ (2)/stitch_/student_portal/screen.png' },
+            { title: 'Class Group Photo', desc: 'Community moments and class identity showcase', img: 'stitch_ (2)/stitch_/class_group_photo/screen.png' },
+            { title: 'Pet Dressing Room', desc: 'Customization and engagement-based unlocks', img: 'stitch_ (2)/stitch_/pet_dressing_room/screen.png' }
           ]
         },
         stats: {
           heading: 'Stats Panel',
           items: [
-            { title: 'Statistics Hub', desc: 'Performance analytics and trend visualization', href: 'stitch_ (2)/stitch_/statistics_hub/code.html' }
+            { title: 'Statistics Hub', desc: 'Performance analytics and trend visualization', img: 'stitch_ (2)/stitch_/statistics_hub/screen.png' }
           ]
         },
         admin: {
           heading: 'Admin Console',
           items: [
-            { title: 'Admin Console', desc: 'System configuration and ecosystem control', href: 'stitch_ (2)/stitch_/admin_console/code.html' }
+            { title: 'Admin Console', desc: 'System configuration and ecosystem control', img: 'stitch_ (2)/stitch_/admin_console/screen.png' }
           ]
         }
       };
@@ -1078,8 +1051,8 @@
             '<span class="preview-count">' + (idx + 1) + '/' + cfg.items.length + '</span>' +
           '</div>' +
           '<div class="preview-stage">' +
-            '<div class="preview-media fixed-frame">' +
-              '<iframe src="' + item.href + '" title="' + item.title + ' live preview" loading="lazy" scrolling="no"></iframe>' +
+            '<div class="preview-media">' +
+              '<img src="' + item.img + '" alt="' + item.title + ' preview">' +
             '</div>' +
             (canSwitch ? '<button class="media-next" data-dir="1" aria-label="Next preview">›</button>' : '') +
           '</div>' +
