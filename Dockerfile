@@ -2,6 +2,7 @@
 
 # Serve landing page and static assets
 COPY . /usr/share/nginx/html
+RUN cp /usr/share/nginx/html/landingpage.html /usr/share/nginx/html/index.html
 
 EXPOSE 8080
 
