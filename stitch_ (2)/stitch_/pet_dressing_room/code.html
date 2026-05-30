@@ -1,0 +1,412 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&amp;family=Be+Vietnam+Pro:wght@400;500&amp;family=Rubik:wght@600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-tertiary": "#ffffff",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-container-high": "#dce9ff",
+                      "on-secondary-container": "#002e60",
+                      "on-error-container": "#93000a",
+                      "inverse-surface": "#233144",
+                      "on-primary-fixed": "#221b00",
+                      "primary-fixed": "#ffe173",
+                      "on-secondary": "#ffffff",
+                      "on-tertiary-fixed": "#002107",
+                      "on-secondary-fixed-variant": "#00468c",
+                      "on-secondary-fixed": "#001b3e",
+                      "primary": "#705d00",
+                      "secondary-fixed-dim": "#a9c7ff",
+                      "on-primary-container": "#725e00",
+                      "tertiary-fixed": "#96f89f",
+                      "primary-fixed-dim": "#e8c426",
+                      "error-container": "#ffdad6",
+                      "outline-variant": "#d0c6ad",
+                      "secondary-container": "#4c96fe",
+                      "outline": "#7e7761",
+                      "surface": "#f8f9ff",
+                      "on-tertiary-fixed-variant": "#00531d",
+                      "on-tertiary-container": "#00702a",
+                      "on-surface-variant": "#4d4633",
+                      "surface-bright": "#f8f9ff",
+                      "surface-tint": "#705d00",
+                      "surface-container-low": "#eff4ff",
+                      "on-error": "#ffffff",
+                      "inverse-on-surface": "#eaf1ff",
+                      "surface-container-highest": "#d5e3fc",
+                      "error": "#ba1a1a",
+                      "on-primary-fixed-variant": "#554500",
+                      "secondary": "#005db8",
+                      "tertiary-fixed-dim": "#7bdb85",
+                      "primary-container": "#ffd93d",
+                      "secondary-fixed": "#d6e3ff",
+                      "on-primary": "#ffffff",
+                      "surface-container": "#e6eeff",
+                      "inverse-primary": "#e8c426"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "margin-mobile": "16px",
+                      "gutter": "20px",
+                      "xs": "4px",
+                      "xl": "64px",
+                      "margin-desktop": "48px",
+                      "lg": "40px",
+                      "sm": "12px",
+                      "base": "8px",
+                      "md": "24px"
+              },
+              "fontFamily": {
+                      "display-lg-mobile": ["Plus Jakarta Sans"],
+                      "body-lg": ["Be Vietnam Pro"],
+                      "headline-md": ["Plus Jakarta Sans"],
+                      "display-lg": ["Plus Jakarta Sans"],
+                      "label-bold": ["Rubik"],
+                      "body-md": ["Be Vietnam Pro"]
+              },
+              "fontSize": {
+                      "display-lg-mobile": ["32px", {"lineHeight": "40px", "fontWeight": "800"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                      "label-bold": ["14px", {"lineHeight": "20px", "fontWeight": "600"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+        .bouncy-button {
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 4px 0 0 rgba(0, 0, 0, 0.1);
+        }
+        .bouncy-button:hover {
+            transform: scale(1.05);
+        }
+        .bouncy-button:active {
+            transform: scale(0.95);
+            box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.1);
+        }
+        .progress-animate {
+            background-image: linear-gradient(45deg, rgba(255,255,255,.15) 25%, transparent 25%, transparent 50%, rgba(255,255,255,.15) 50%, rgba(255,255,255,.15) 75%, transparent 75%, transparent);
+            background-size: 1rem 1rem;
+            animation: progress-bar-stripes 1s linear infinite;
+        }
+        @keyframes progress-bar-stripes {
+            from { background-position: 1rem 0; }
+            to { background-position: 0 0; }
+        }
+        .habitat-bg {
+            background: radial-gradient(circle at top right, #e6eeff, #f8f9ff);
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #d5e3fc;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-surface habitat-bg min-h-screen text-on-surface font-body-md overflow-x-hidden">
+<!-- Top Navigation -->
+<header class="fixed top-0 w-full bg-surface/70 backdrop-blur-xl border-b border-white/20 shadow-sm flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 w-full z-50">
+<div class="font-display-lg text-display-lg-mobile md:text-display-lg font-extrabold text-primary tracking-tight">Pupil Pals</div>
+<nav class="hidden md:flex gap-md items-center">
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors cursor-pointer active:scale-95 hover:scale-105 transition-transform duration-200" href="#">Main Display</a>
+<a class="text-secondary font-bold border-b-2 border-secondary pb-1 cursor-pointer active:scale-95 hover:scale-105 transition-transform duration-200" href="#">Classroom</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors cursor-pointer active:scale-95 hover:scale-105 transition-transform duration-200" href="#">Dashboard</a>
+</nav>
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary p-2 hover:bg-surface-variant rounded-full cursor-pointer transition-colors">notifications</span>
+<span class="material-symbols-outlined text-primary p-2 hover:bg-surface-variant rounded-full cursor-pointer transition-colors">settings</span>
+<img alt="Teacher profile avatar" class="w-10 h-10 rounded-full border-2 border-primary-container shadow-sm cursor-pointer hover:scale-110 transition-transform" src="https://lh3.googleusercontent.com/aida-public/AB6AXuANiBDRJSt6aejs9IDkEyjB1KJSpssNzgNXxIsRQ_QOr6o797vy8MiyvjY2HIe_KpNyQNa1RBli-LTrrAaJdcAgADoGlQPgHIRE4I2LeNMhzxYRohrA-tut_Uah_jykThYdJgEYdzc1J1HOU7hB9b8JGt0myv3X88e9-9RnFa9vI0vdQ5NQgEUIvzzSn3Exv-_nBMQVJ0azr2Ef8YwsCPVHGjLnMg5xdK1L8ZoD8I0NaaXmK1jJkPKQ6Glzar4o1qJdfemqhYGS5HPT">
+</div>
+</header>
+<!-- Side Navigation (Desktop Only) -->
+<aside class="hidden md:flex h-screen w-64 fixed left-0 top-0 flex-col py-md bg-surface-container-low/80 backdrop-blur-lg border-r border-white/10 shadow-xl z-40 pt-24">
+<div class="px-md mb-lg">
+<div class="flex items-center gap-3 mb-2">
+<span class="material-symbols-outlined text-primary text-3xl">school</span>
+<div>
+<h3 class="font-headline-md text-primary text-label-bold leading-tight">Admin Panel</h3>
+<p class="text-xs text-on-surface-variant">Manage Habitat</p>
+</div>
+</div>
+<button class="w-full mt-4 bg-primary text-on-primary font-label-bold py-3 rounded-xl bouncy-button flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">add</span> New Student
+            </button>
+</div>
+<nav class="flex-1 flex flex-col gap-2">
+<a class="bg-secondary-container text-on-secondary-container rounded-xl mx-2 p-3 flex items-center gap-3 shadow-[0_4px_0_0_rgba(0,93,184,0.3)] hover:translate-x-1 transition-transform" href="#">
+<span class="material-symbols-outlined">school</span> Classroom
+            </a>
+<a class="text-on-surface-variant hover:bg-surface-variant/50 rounded-xl mx-2 p-3 flex items-center gap-3 transition-all hover:translate-x-1 transition-transform" href="#">
+<span class="material-symbols-outlined">group</span> Students
+            </a>
+<a class="text-on-surface-variant hover:bg-surface-variant/50 rounded-xl mx-2 p-3 flex items-center gap-3 transition-all hover:translate-x-1 transition-transform" href="#">
+<span class="material-symbols-outlined">leaderboard</span> Analytics
+            </a>
+<a class="text-on-surface-variant hover:bg-surface-variant/50 rounded-xl mx-2 p-3 flex items-center gap-3 transition-all hover:translate-x-1 transition-transform" href="#">
+<span class="material-symbols-outlined">psychology</span> Behaviors
+            </a>
+<a class="text-on-surface-variant hover:bg-surface-variant/50 rounded-xl mx-2 p-3 flex items-center gap-3 transition-all hover:translate-x-1 transition-transform" href="#">
+<span class="material-symbols-outlined">settings</span> Settings
+            </a>
+</nav>
+<div class="px-2 mt-auto">
+<a class="text-on-surface-variant hover:bg-surface-variant/50 rounded-xl p-3 flex items-center gap-3 transition-all mb-1" href="#">
+<span class="material-symbols-outlined">help</span> Support
+            </a>
+<a class="text-on-surface-variant hover:bg-surface-variant/50 rounded-xl p-3 flex items-center gap-3 transition-all" href="#">
+<span class="material-symbols-outlined">logout</span> Logout
+            </a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="md:pl-64 pt-24 min-h-screen px-margin-mobile md:px-margin-desktop pb-12">
+<div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Page Header -->
+<div class="lg:col-span-12 mb-4">
+<h1 class="font-display-lg text-display-lg-mobile md:text-headline-md text-on-surface flex items-center gap-3">
+<span class="material-symbols-outlined text-4xl text-secondary">checkroom</span>
+                    Dressing Room
+                </h1>
+<p class="font-body-md text-on-surface-variant">Customize your Sage Owl and unlock its true potential.</p>
+</div>
+<!-- Left Column: Pet Preview & Evolution -->
+<div class="lg:col-span-7 flex flex-col gap-gutter">
+<!-- Fitting Room Card -->
+<div class="glass-card rounded-[32px] p-md relative overflow-hidden h-[500px] flex items-center justify-center shadow-lg border-2 border-white/50">
+<div class="absolute inset-0 bg-gradient-to-br from-primary-container/20 to-secondary-container/10 -z-10"></div>
+<div class="absolute top-6 left-6 flex gap-2">
+<div class="bg-tertiary-container text-on-tertiary-container px-4 py-1.5 rounded-full font-label-bold flex items-center gap-2 shadow-sm">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                            Lvl. 14 Sage Owl
+                        </div>
+</div>
+<!-- Main Pet Image Area -->
+<div class="relative group">
+<img alt="Sage Owl Preview" class="w-80 h-80 object-contain drop-shadow-[0_20px_50px_rgba(112,93,0,0.3)] transform transition-transform duration-700 group-hover:scale-110" data-alt="A majestic, wise Sage Owl pet with large, expressive eyes and intricate white and blue feathers, standing proudly on a polished wooden perch inside a sunlit, high-tech classroom. The owl is wearing a tiny digital graduation cap and a glowing blue scarf. The lighting is soft and magical, with floating golden dust motes around the pet. The overall aesthetic is playful yet polished, featuring the Lumina Pupil Pals blue and yellow signature colors." src="https://lh3.googleusercontent.com/aida-public/AB6AXuABumaehLgGi4URXhub4zGLjvo5bNlM4TtOSaNaw7skQuzFXf270JsiHz34-WKyYiBHibm2vV6vaIFQ7MkkKKDYHbJqgQOAkBM5bj5JGeHNv7xryCEjvtKc3-1ucEvh_7Ot3DLTHCTeVzgQn9EzdoG1Wm0UHZcmKtZVlwFeUzEj1xv6gqLT5VtJOC58NTqCpv-rVT15_HoofCVLioM6KsJOcEDJvVKppe9FZgP0h7l_YsgPFpO0Ixlavt2AWcBd2VFG5zHRRpd0REFw" style="transform: translateY(-4.79464px);">
+<div class="absolute -bottom-4 left-1/2 -translate-x-1/2 w-48 h-6 bg-black/10 blur-xl rounded-full"></div>
+</div>
+<div class="absolute bottom-6 left-0 right-0 flex justify-center gap-md">
+<button class="bouncy-button bg-secondary text-on-secondary px-6 py-3 rounded-full font-label-bold flex items-center gap-2 shadow-[0_4px_0_0_#00468c]">
+<span class="material-symbols-outlined">share</span> Share Look
+                        </button>
+<button class="bouncy-button bg-primary-container text-on-primary-container px-6 py-3 rounded-full font-label-bold flex items-center gap-2 shadow-[0_4px_0_0_#d1b000]">
+<span class="material-symbols-outlined">auto_fix_high</span> Randomize
+                        </button>
+</div>
+</div>
+<!-- Evolution Path Card -->
+<div class="glass-card rounded-[32px] p-md shadow-lg border-2 border-white/50">
+<div class="flex justify-between items-center mb-md">
+<h3 class="font-headline-md text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary">trending_up</span> Evolution Path
+                        </h3>
+<div class="text-tertiary font-label-bold bg-tertiary-container/30 px-3 py-1 rounded-lg">850 / 1000 XP to Evolve</div>
+</div>
+<div class="grid grid-cols-3 gap-md relative">
+<!-- Connector Line -->
+<div class="absolute top-1/2 left-0 right-0 h-1 bg-surface-variant -translate-y-1/2 -z-10 mx-12"></div>
+<!-- Stage 1 (Active) -->
+<div class="flex flex-col items-center gap-2">
+<div class="w-20 h-20 rounded-full bg-primary-container flex items-center justify-center border-4 border-white shadow-md ring-4 ring-primary/20">
+<img alt="Current Stage" class="w-12 h-12" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtvXfTQeyYerlLr39MDOc5eO38cLgpgafHn5_Nr4cuChdCfC2kijX907d_hmXelBjLysFx6ILDqf4hnkgIcW710Nf_bEsa7KXoK7STB4pl_a7gN3cN23PZxVxQ7_MwPqt2iypAKHQxf0wS2WMBbGPc4lH3EUNWqsX_L3OBh4jVdvb26-3Hp_GpysWZt-Ik-pzN_rzOhXAky46vwTG2uy8Bh4KeOcXgrqdTnSTnpwHXLoRtEE-E8F-dp2V4DPeueXwwdoHdngQ6Diz-">
+</div>
+<span class="font-label-bold text-primary">Sage Owl</span>
+</div>
+<!-- Stage 2 (Next) -->
+<div class="flex flex-col items-center gap-2">
+<div class="w-20 h-20 rounded-full bg-secondary-container/30 flex items-center justify-center border-4 border-white shadow-sm relative group cursor-pointer hover:bg-secondary-container/50 transition-colors">
+<img alt="Next Stage" class="w-12 h-12 grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCaDlW12U2hKo22wrPwbvUBIgru4YFTohtWwgpeL5raFMqm3StdpeCTM6xSan7Ga3mO3VYU94KhdCU4doGfEHY8ikNTb7P0JFgtzDr4vvvOf0meC82EyG_jEdAeIiRFd9nkEXFPBVUhFUzBM0MxtQ6uyrvkDVEFTeDahxAVhKK86umVtptcczlNznrkdIfUzFiI7zp0ao4V_P0LAazLql-9z5uL8W7xyZ9YgQ1dIC5NwGZKldSIkERRHkQuZR3F-s4eOtVT9gVNMj3Z">
+<span class="material-symbols-outlined absolute inset-0 flex items-center justify-center text-secondary opacity-60 group-hover:opacity-100 transition-opacity">lock</span>
+</div>
+<span class="font-label-bold text-on-surface-variant">Mystic Owl</span>
+</div>
+<!-- Stage 3 (Final) -->
+<div class="flex flex-col items-center gap-2">
+<div class="w-20 h-20 rounded-full bg-surface-variant flex items-center justify-center border-4 border-white shadow-sm opacity-50">
+<img alt="Final Stage" class="w-12 h-12 grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCekTCza2ylQQ58QB0hpyoZFQzsW1VQIXw92I_2iHWXXLvRVUQtB-Jz4xJV7B1exp4mJ3irdfDUmelxNnvvx6pQv7lH7GzQSiDRldDQI286Dhwj3MRalqMYZm5a5sV5OvymNws70axcqpJyo-7UapehioMktUxi91kpZ4oWQjMdEB7ZXpbVLM2up8I1UnWeuRJ7zb4tlKc9--U8bWPYe4u9vRK6aNuwELFTbqK9DnzxxAAsQ3mhRykEWwf40a3-vkq7AiJrwogvx6wS">
+</div>
+<span class="font-label-bold text-on-surface-variant">Eternal Star</span>
+</div>
+</div>
+<div class="mt-md">
+<div class="w-full h-3 bg-surface-variant rounded-full overflow-hidden">
+<div class="w-[85%] h-full bg-tertiary progress-animate rounded-full"></div>
+</div>
+<div class="flex justify-between mt-2">
+<button class="text-secondary font-label-bold hover:underline flex items-center gap-1">
+                                Preview Next Stage <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Inventory -->
+<div class="lg:col-span-5">
+<div class="glass-card rounded-[32px] h-full flex flex-col shadow-xl border-2 border-white/50 overflow-hidden">
+<div class="p-md bg-white/40 border-b border-white/50">
+<div class="flex justify-between items-center mb-md">
+<h3 class="font-headline-md text-on-surface">Closet</h3>
+<div class="flex items-center gap-2 bg-primary-container text-on-primary-container px-3 py-1 rounded-full font-label-bold">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">monetization_on</span>
+                                2,450
+                            </div>
+</div>
+<!-- Category Tabs -->
+<div class="flex gap-2 overflow-x-auto pb-2">
+<button class="bg-primary text-on-primary px-4 py-2 rounded-xl font-label-bold shadow-sm whitespace-nowrap">Hats</button>
+<button class="bg-surface-variant text-on-surface-variant px-4 py-2 rounded-xl font-label-bold hover:bg-surface-container-highest transition-colors whitespace-nowrap">Glasses</button>
+<button class="bg-surface-variant text-on-surface-variant px-4 py-2 rounded-xl font-label-bold hover:bg-surface-container-highest transition-colors whitespace-nowrap">Capes</button>
+<button class="bg-surface-variant text-on-surface-variant px-4 py-2 rounded-xl font-label-bold hover:bg-surface-container-highest transition-colors whitespace-nowrap">Auras</button>
+</div>
+</div>
+<!-- Inventory Scroll Area -->
+<div class="flex-1 overflow-y-auto p-md space-y-md">
+<!-- Rarity Section: Rare -->
+<div>
+<div class="flex items-center gap-2 mb-sm">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<h4 class="font-label-bold text-on-surface-variant uppercase tracking-wider text-xs">Rare Items</h4>
+</div>
+<div class="grid grid-cols-2 gap-sm">
+<div class="p-4 rounded-2xl bg-secondary-container/10 border-2 border-secondary/20 flex flex-col items-center gap-2 cursor-pointer hover:border-secondary transition-all group">
+<div class="w-16 h-16 bg-white rounded-xl shadow-sm flex items-center justify-center group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-4xl text-secondary">school</span>
+</div>
+<span class="font-label-bold text-sm text-center">Scholar Cap</span>
+<div class="text-[10px] bg-secondary text-on-secondary px-2 rounded-full">EQUIPPED</div>
+</div>
+<div class="p-4 rounded-2xl bg-white/50 border-2 border-transparent flex flex-col items-center gap-2 cursor-pointer hover:bg-white hover:shadow-md transition-all group">
+<div class="w-16 h-16 bg-white rounded-xl shadow-sm flex items-center justify-center group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-4xl text-secondary">comedy_mask</span>
+</div>
+<span class="font-label-bold text-sm text-center">Drama Mask</span>
+<button class="text-xs font-label-bold text-secondary">EQUIP</button>
+</div>
+</div>
+</div>
+<!-- Rarity Section: Legendary -->
+<div>
+<div class="flex items-center gap-2 mb-sm">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<h4 class="font-label-bold text-on-surface-variant uppercase tracking-wider text-xs">Legendary</h4>
+</div>
+<div class="grid grid-cols-2 gap-sm">
+<div class="p-4 rounded-2xl bg-primary-container/10 border-2 border-primary/20 flex flex-col items-center gap-2 cursor-pointer hover:border-primary transition-all group">
+<div class="w-16 h-16 bg-white rounded-xl shadow-sm flex items-center justify-center group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-4xl text-primary">crown</span>
+</div>
+<span class="font-label-bold text-sm text-center">Sun King Crown</span>
+<button class="text-xs font-label-bold text-primary">EQUIP</button>
+</div>
+<div class="p-4 rounded-2xl bg-white/30 border-2 border-dashed border-outline-variant flex flex-col items-center justify-center gap-2 opacity-60">
+<div class="w-16 h-16 rounded-xl flex items-center justify-center">
+<span class="material-symbols-outlined text-4xl text-outline">lock</span>
+</div>
+<span class="font-label-bold text-sm text-center">Phoenix Helm</span>
+<span class="text-[10px] text-outline">LVL 20 REWARD</span>
+</div>
+</div>
+</div>
+<!-- Rarity Section: Common -->
+<div>
+<div class="flex items-center gap-2 mb-sm">
+<span class="w-2 h-2 rounded-full bg-outline-variant"></span>
+<h4 class="font-label-bold text-on-surface-variant uppercase tracking-wider text-xs">Common</h4>
+</div>
+<div class="grid grid-cols-2 gap-sm">
+<div class="p-4 rounded-2xl bg-white/50 border-2 border-transparent flex flex-col items-center gap-2 cursor-pointer hover:bg-white hover:shadow-md transition-all group">
+<div class="w-16 h-16 bg-white rounded-xl shadow-sm flex items-center justify-center group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-4xl text-on-surface-variant">eyeglasses</span>
+</div>
+<span class="font-label-bold text-sm text-center">Reading Specs</span>
+<button class="text-xs font-label-bold text-secondary">EQUIP</button>
+</div>
+<div class="p-4 rounded-2xl bg-white/50 border-2 border-transparent flex flex-col items-center gap-2 cursor-pointer hover:bg-white hover:shadow-md transition-all group">
+<div class="w-16 h-16 bg-white rounded-xl shadow-sm flex items-center justify-center group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-4xl text-on-surface-variant">architecture</span>
+</div>
+<span class="font-label-bold text-sm text-center">Artist Beret</span>
+<button class="text-xs font-label-bold text-secondary">EQUIP</button>
+</div>
+</div>
+</div>
+</div>
+<div class="p-md bg-white/40 border-t border-white/50">
+<button class="w-full bg-primary text-on-primary py-4 rounded-2xl font-label-bold bouncy-button shadow-[0_4px_0_0_#554500] flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">check_circle</span>
+                            Confirm Selection
+                        </button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Floating Action for Quick Access -->
+<div class="fixed bottom-6 right-6 md:right-12 z-50">
+<button class="w-14 h-14 bg-secondary text-on-secondary rounded-full flex items-center justify-center shadow-lg bouncy-button">
+<span class="material-symbols-outlined text-3xl">auto_stories</span>
+</button>
+</div>
+<script>
+        // Micro-interactions and effects
+        document.querySelectorAll('.inventory-item').forEach(item => {
+            item.addEventListener('click', () => {
+                // Haptic feedback simulation
+                item.classList.add('ring-4', 'ring-primary-container');
+                setTimeout(() => item.classList.remove('ring-4'), 200);
+            });
+        });
+
+        // Simple preview switch animation effect
+        const petImage = document.querySelector('[alt="Sage Owl Preview"]');
+        if(petImage) {
+            setInterval(() => {
+                petImage.style.transform = `translateY(${Math.sin(Date.now() / 1000) * 8}px)`;
+            }, 50);
+        }
+
+        // Handle Active states in Nav
+        const navLinks = document.querySelectorAll('nav a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                navLinks.forEach(l => {
+                    l.classList.remove('text-secondary', 'font-bold', 'border-b-2', 'border-secondary', 'pb-1');
+                    l.classList.add('text-on-surface-variant', 'font-medium');
+                });
+                link.classList.add('text-secondary', 'font-bold', 'border-b-2', 'border-secondary', 'pb-1');
+                link.classList.remove('text-on-surface-variant', 'font-medium');
+            });
+        });
+    </script>
+
+
+</body></html>

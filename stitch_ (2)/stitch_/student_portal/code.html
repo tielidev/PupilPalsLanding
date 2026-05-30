@@ -1,0 +1,420 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Pupil Pals - Student Portal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Be+Vietnam+Pro:wght@400;500&amp;family=Rubik:wght@600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+        .bouncy-btn {
+            transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 4px 0 0 rgba(0, 0, 0, 0.1);
+        }
+        .bouncy-btn:hover {
+            transform: scale(1.05);
+        }
+        .bouncy-btn:active {
+            transform: scale(0.95);
+            box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.1);
+        }
+        .progress-stripe {
+            background-image: linear-gradient(45deg, rgba(255,255,255,.15) 25%, transparent 25%, transparent 50%, rgba(255,255,255,.15) 50%, rgba(255,255,255,.15) 75%, transparent 75%, transparent);
+            background-size: 1rem 1rem;
+            animation: progress-animation 2s linear infinite;
+        }
+        @keyframes progress-animation {
+            from { background-position: 1rem 0; }
+            to { background-position: 0 0; }
+        }
+        .glitter-star {
+            position: absolute;
+            pointer-events: none;
+            animation: sparkle 1.5s ease-in-out infinite;
+        }
+        @keyframes sparkle {
+            0%, 100% { transform: scale(0) rotate(0deg); opacity: 0; }
+            50% { transform: scale(1) rotate(180deg); opacity: 1; }
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-tertiary-fixed-variant": "#00531d",
+                      "surface-variant": "#d5e3fc",
+                      "surface-container-high": "#dce9ff",
+                      "surface-tint": "#705d00",
+                      "tertiary-fixed-dim": "#7bdb85",
+                      "background": "#f8f9ff",
+                      "on-secondary": "#ffffff",
+                      "secondary-fixed-dim": "#a9c7ff",
+                      "surface-dim": "#ccdbf3",
+                      "on-primary-fixed-variant": "#554500",
+                      "primary": "#705d00",
+                      "on-tertiary": "#ffffff",
+                      "error-container": "#ffdad6",
+                      "surface-container-lowest": "#ffffff",
+                      "outline": "#7e7761",
+                      "on-secondary-fixed": "#001b3e",
+                      "on-background": "#0d1c2e",
+                      "tertiary-container": "#8ff199",
+                      "on-surface": "#0d1c2e",
+                      "surface-container-highest": "#d5e3fc",
+                      "surface-container-low": "#eff4ff",
+                      "outline-variant": "#d0c6ad",
+                      "inverse-surface": "#233144",
+                      "tertiary-fixed": "#96f89f",
+                      "on-error": "#ffffff",
+                      "primary-fixed-dim": "#e8c426",
+                      "inverse-primary": "#e8c426",
+                      "secondary-fixed": "#d6e3ff",
+                      "on-secondary-fixed-variant": "#00468c",
+                      "primary-fixed": "#ffe173",
+                      "surface-bright": "#f8f9ff",
+                      "on-surface-variant": "#4d4633",
+                      "on-tertiary-fixed": "#002107",
+                      "on-primary": "#ffffff",
+                      "secondary-container": "#4c96fe",
+                      "on-primary-fixed": "#221b00",
+                      "on-secondary-container": "#002e60",
+                      "on-tertiary-container": "#00702a",
+                      "error": "#ba1a1a",
+                      "secondary": "#005db8",
+                      "tertiary": "#006e29",
+                      "on-error-container": "#93000a",
+                      "surface-container": "#e6eeff",
+                      "surface": "#f8f9ff",
+                      "on-primary-container": "#725e00",
+                      "inverse-on-surface": "#eaf1ff",
+                      "primary-container": "#ffd93d"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "margin-mobile": "16px",
+                      "xs": "4px",
+                      "sm": "12px",
+                      "margin-desktop": "48px",
+                      "lg": "40px",
+                      "md": "24px",
+                      "xl": "64px",
+                      "gutter": "20px",
+                      "base": "8px"
+              },
+              "fontFamily": {
+                      "label-bold": ["Rubik"],
+                      "headline-md": ["Plus Jakarta Sans"],
+                      "body-md": ["Be Vietnam Pro"],
+                      "body-lg": ["Be Vietnam Pro"],
+                      "display-lg-mobile": ["Plus Jakarta Sans"],
+                      "display-lg": ["Plus Jakarta Sans"]
+              },
+              "fontSize": {
+                      "label-bold": ["14px", {"lineHeight": "20px", "fontWeight": "600"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "display-lg-mobile": ["32px", {"lineHeight": "40px", "fontWeight": "800"}],
+                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-background min-h-screen font-body-md text-on-background selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full bg-surface/70 backdrop-blur-xl border-b border-white/20 shadow-md flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 w-full z-50">
+<div class="flex items-center gap-4">
+<span class="font-display-lg text-display-lg-mobile md:text-display-lg font-extrabold text-primary tracking-tight">Pupil Pals</span>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-secondary font-bold border-b-2 border-secondary pb-1 font-label-bold text-label-bold" href="#">Main Display</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors font-label-bold text-label-bold" href="#">Dashboard</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors font-label-bold text-label-bold" href="#">Admin</a>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden sm:block">
+<input class="bg-surface-variant/30 border-2 border-transparent focus:border-secondary-container rounded-full py-2 px-10 text-label-bold font-label-bold w-64 transition-all focus:w-80 outline-none" placeholder="Search other pets..." type="text">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+</div>
+<button class="material-symbols-outlined text-primary hover:scale-105 transition-transform cursor-pointer active:scale-95">notifications</button>
+<button class="material-symbols-outlined text-primary hover:scale-105 transition-transform cursor-pointer active:scale-95">settings</button>
+<img alt="Teacher profile avatar" class="w-10 h-10 rounded-full border-2 border-primary-container shadow-sm" data-alt="A friendly profile avatar of a young primary school teacher with a warm smile, wearing a professional yet casual denim shirt. The background is a brightly lit, soft-focus classroom with colorful student art on the walls, maintaining a joyful and academic atmosphere with light mode aesthetics." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCN7HLSExlf6QGxudjkB4C7wErHQ0xfcn221yL05-SI0gf1Kj3OyL1iwcd3SIsbiV6Tj7Z63S4FysntoreJD27OSaYHvxZmpyy83pk7j3EaGC1LdRm62-POHvhxoBjVKUoFnzdKQL6WlMlRdgngSNo0Tnh1hT1GRoNSflB7uhVkDmJxaD_uUJT-wyah50k64EI71otkKxkxOWlCy0GfBfpRYUPgVct6JCg4lQUs88tDV6KvbEHXsJDl_6d5P-hJC5_oTF8kJv1ZNhJy">
+</div>
+</header>
+<main class="pt-24 pb-12 px-margin-mobile md:px-margin-desktop max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Left Column: Stats & Mood -->
+<aside class="md:col-span-3 space-y-gutter">
+<!-- XP Summary Card -->
+<div class="glass-card rounded-xl p-md shadow-sm border-white/20">
+<h3 class="font-headline-md text-headline-md text-primary mb-sm flex items-center gap-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">stars</span>
+                    Level 14
+                </h3>
+<div class="space-y-4">
+<div>
+<div class="flex justify-between text-label-bold mb-1">
+<span class="">Total XP</span>
+<span class="text-primary">1,240 / 1,500</span>
+</div>
+<div class="h-4 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary primary-progress-fill progress-stripe w-[82%]"></div>
+</div>
+</div>
+<div class="flex items-center justify-between p-sm bg-primary-container/30 rounded-lg">
+<div class="flex flex-col">
+<span class="text-label-bold text-on-primary-container/70 uppercase text-[10px]">Today</span>
+<span class="font-bold text-primary">+120 pts</span>
+</div>
+<span class="material-symbols-outlined text-primary text-3xl">trending_up</span>
+</div>
+</div>
+</div>
+<!-- Mood History -->
+<div class="glass-card rounded-xl p-md shadow-sm">
+<h3 class="font-label-bold text-label-bold text-on-surface-variant mb-md flex items-center gap-2">
+<span class="material-symbols-outlined">analytics</span>
+                    MOOD HISTORY
+                </h3>
+<div class="flex items-end gap-2 h-24 mb-4">
+<div class="flex-1 bg-tertiary-container rounded-t-lg h-[60%] transition-all hover:h-[70%] cursor-help" title="Monday: Happy"></div>
+<div class="flex-1 bg-primary-container rounded-t-lg h-[80%] transition-all hover:h-[90%] cursor-help" title="Tuesday: Joyful"></div>
+<div class="flex-1 bg-tertiary-container rounded-t-lg h-[40%] transition-all hover:h-[50%] cursor-help" title="Wednesday: Tired"></div>
+<div class="flex-1 bg-secondary-container rounded-t-lg h-[95%] transition-all hover:h-[100%] cursor-help" title="Thursday: Excited"></div>
+<div class="flex-1 bg-primary-container rounded-t-lg h-[75%] transition-all hover:h-[85%] cursor-help" title="Friday: Learning"></div>
+</div>
+<div class="flex justify-between text-[10px] font-bold text-on-surface-variant px-1">
+<span class="">M</span><span class="">T</span><span class="">W</span><span class="">T</span><span class="">F</span>
+</div>
+</div>
+</aside>
+<!-- Center Column: Pet Habitat -->
+<section class="md:col-span-6 relative">
+<div class="glass-card rounded-3xl p-xl flex flex-col items-center justify-center min-h-[500px] overflow-hidden relative border-2 border-white/50">
+<!-- Glitter/Sparkle Overlays -->
+<div class="absolute inset-0 pointer-events-none" id="sparkle-container"><span class="material-symbols-outlined glitter-star" style="left: 8.34167%; top: 5.8338%; color: rgb(255, 217, 61); font-size: 27.8015px; animation-delay: 0.300216s;">grade</span><span class="material-symbols-outlined glitter-star" style="left: 87.6872%; top: 98.917%; color: rgb(76, 150, 254); font-size: 18.1173px; animation-delay: 0.857567s;">grade</span><span class="material-symbols-outlined glitter-star" style="left: 42.8146%; top: 41.5497%; color: rgb(76, 150, 254); font-size: 22.8676px; animation-delay: 0.190101s;">grade</span><span class="material-symbols-outlined glitter-star" style="left: 72.5441%; top: 41.1415%; color: rgb(123, 219, 133); font-size: 11.534px; animation-delay: 0.870154s;">grade</span><span class="material-symbols-outlined glitter-star" style="left: 30.3454%; top: 22.2722%; color: rgb(123, 219, 133); font-size: 16.5487px; animation-delay: 0.348785s;">grade</span><span class="material-symbols-outlined glitter-star" style="left: 93.363%; top: 32.9143%; color: rgb(76, 150, 254); font-size: 18.8219px; animation-delay: 0.43512s;">grade</span><span class="material-symbols-outlined glitter-star" style="left: 71.3103%; top: 4.12239%; color: rgb(255, 225, 115); font-size: 20.5772px; animation-delay: 0.326469s;">grade</span><span class="material-symbols-outlined glitter-star" style="left: 54.5374%; top: 34.749%; color: rgb(76, 150, 254); font-size: 20.6668px; animation-delay: 0.724387s;">grade</span><span class="material-symbols-outlined glitter-star" style="left: 5.16348%; top: 40.0507%; color: rgb(76, 150, 254); font-size: 25.3771px; animation-delay: 0.749749s;">grade</span><span class="material-symbols-outlined glitter-star" style="left: 45.5235%; top: 52.6426%; color: rgb(255, 225, 115); font-size: 29.8711px; animation-delay: 0.679573s;">grade</span><span class="material-symbols-outlined glitter-star" style="left: 40.6454%; top: 17.4683%; color: rgb(255, 225, 115); font-size: 19.9115px; animation-delay: 0.788797s;">grade</span><span class="material-symbols-outlined glitter-star" style="left: 8.27271%; top: 93.9876%; color: rgb(76, 150, 254); font-size: 26.1717px; animation-delay: 0.646846s;">grade</span><span class="material-symbols-outlined glitter-star" style="left: 79.7445%; top: 63.049%; color: rgb(255, 217, 61); font-size: 20.578px; animation-delay: 0.647976s;">grade</span><span class="material-symbols-outlined glitter-star" style="left: 39.5818%; top: 25.2212%; color: rgb(123, 219, 133); font-size: 17.1446px; animation-delay: 0.345913s;">grade</span><span class="material-symbols-outlined glitter-star" style="left: 4.64724%; top: 40.248%; color: rgb(76, 150, 254); font-size: 26.0028px; animation-delay: 0.50668s;">grade</span></div>
+<!-- Pet Identity -->
+<div class="absolute top-8 text-center z-10">
+<div class="flex items-center gap-2 bg-white/40 backdrop-blur-md px-4 py-1 rounded-full border border-white/20 mb-2">
+<span class="w-3 h-3 rounded-full bg-green-500 animate-pulse"></span>
+<span class="font-label-bold text-label-bold text-on-surface">Sparky is happy!</span>
+</div>
+<h2 class="font-display-lg text-display-lg-mobile font-extrabold text-primary">Sparky</h2>
+</div>
+<!-- Dialogue Bubble -->
+<div class="absolute top-32 right-12 md:right-24 z-10 animate-bounce">
+<div class="relative bg-white p-4 rounded-2xl rounded-tr-none shadow-lg max-w-[180px]">
+<p class="text-body-md font-medium text-on-surface-variant">Ready to learn some math today?</p>
+<div class="absolute -right-2 top-0 w-0 h-0 border-t-[10px] border-t-white border-r-[10px] border-r-transparent"></div>
+</div>
+</div>
+<!-- Central Pet Illustration -->
+<div class="relative group cursor-pointer active:scale-95 transition-transform duration-300">
+<div class="absolute -inset-4 bg-primary-container/20 rounded-full blur-3xl animate-pulse"></div>
+<img alt="Digital Pet Avatar" class="w-64 h-64 md:w-80 md:h-80 object-cover rounded-full border-8 border-tertiary-container shadow-2xl relative z-10 transition-all group-hover:scale-105 animate-bounce" data-alt="A whimsical, 3D stylized digital pet resembling a fluffy blue and gold fox-owl hybrid. It has large, expressive golden eyes and is sitting in a playful pose. The style is high-end digital polish, similar to modern animation films, with soft tactile fur textures and a gentle inner glow. The background is a soft, blurred digital habitat with floating geometric sparks." id="pet-avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvbYuGqSUamNAQk0_R1pVTlaR6BnNKNduhqq1Pb9yEfeRHfWQymD8DXvSQPtD5Tc6Hc-jOEeSIOIWz19RV9hMy5w0N4E3NlAWSM_57OGHzzdgY_aaA4W96wbTB4FI3RfWRJ79f_JWpl2lSJNj1EcDGEgn3mGHMhD7_GK9X9ro-brM-n6cNUhz-glT06S8UNScfPk1AgNJeRSCIMY3BppSoe1jCeayCZ4DDuegntS_csqNaeQGWUGWzhLpzxT0DaNk7hMhWaP2HrTpC">
+<!-- XP Chip -->
+<div class="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-secondary text-white px-4 py-1 rounded-full font-label-bold text-label-bold shadow-[0_4px_0_0_rgba(0,93,184,0.3)] z-20 flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+                        +5 XP
+                    </div>
+</div>
+<!-- Interaction Buttons -->
+<div class="absolute bottom-12 flex flex-wrap justify-center gap-4 z-20 w-full px-6">
+<button class="bouncy-btn bg-white px-6 py-3 rounded-full flex items-center gap-2 font-label-bold text-label-bold text-secondary-container border-b-[3px] border-secondary-container/20" onclick="addSparkles()">
+<span class="material-symbols-outlined">front_hand</span> Petting
+                    </button>
+<button class="bouncy-btn bg-white px-6 py-3 rounded-full flex items-center gap-2 font-label-bold text-label-bold text-primary border-b-[3px] border-primary/20">
+<span class="material-symbols-outlined">restaurant</span> Feeding
+                    </button>
+<button class="bouncy-btn bg-white px-6 py-3 rounded-full flex items-center gap-2 font-label-bold text-label-bold text-tertiary border-b-[3px] border-tertiary/20">
+<span class="material-symbols-outlined">sports_esports</span> Playing
+                    </button>
+<button class="bouncy-btn bg-white px-6 py-3 rounded-full flex items-center gap-2 font-label-bold text-label-bold text-on-surface-variant border-b-[3px] border-on-surface-variant/20">
+<span class="material-symbols-outlined">chat</span> Chatting
+                    </button>
+</div>
+</div>
+<!-- Evolution Path Timeline -->
+<div class="mt-gutter glass-card rounded-2xl p-md border-white/20">
+<div class="flex items-center justify-between mb-4">
+<span class="font-label-bold text-label-bold text-primary">Evolution Path</span>
+<span class="text-[12px] font-bold text-on-surface-variant">420 XP to next stage</span>
+</div>
+<div class="relative flex items-center justify-between px-4">
+<!-- Line -->
+<div class="absolute h-1 left-8 right-8 top-1/2 -translate-y-1/2 bg-surface-container-highest z-0">
+<div class="h-full bg-secondary w-2/3"></div>
+</div>
+<!-- Stages -->
+<div class="relative z-10 flex flex-col items-center gap-2">
+<div class="w-10 h-10 rounded-full bg-secondary text-white flex items-center justify-center shadow-md">
+<span class="material-symbols-outlined text-sm">egg</span>
+</div>
+<span class="text-[10px] font-bold text-on-surface-variant">Egg</span>
+</div>
+<div class="relative z-10 flex flex-col items-center gap-2">
+<div class="w-10 h-10 rounded-full bg-secondary text-white flex items-center justify-center shadow-md border-4 border-secondary-container">
+<span class="material-symbols-outlined text-sm">child_care</span>
+</div>
+<span class="text-[10px] font-bold text-primary">Juvenile</span>
+</div>
+<div class="relative z-10 flex flex-col items-center gap-2 opacity-40">
+<div class="w-10 h-10 rounded-full bg-surface-container text-on-surface-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-sm">auto_awesome</span>
+</div>
+<span class="text-[10px] font-bold text-on-surface-variant">Mystic</span>
+</div>
+<div class="relative z-10 flex flex-col items-center gap-2 opacity-40">
+<div class="w-10 h-10 rounded-full bg-surface-container text-on-surface-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-sm">grade</span>
+</div>
+<span class="text-[10px] font-bold text-on-surface-variant">Eternal Star</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Right Column: Activities & Social -->
+<aside class="md:col-span-3 space-y-gutter">
+<!-- Daily Tasks -->
+<div class="glass-card rounded-xl p-md shadow-sm border-white/20">
+<h3 class="font-label-bold text-label-bold text-on-surface-variant mb-md flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">assignment_turned_in</span>
+                    DAILY TASKS
+                </h3>
+<div class="space-y-3">
+<div class="group flex items-center gap-3 p-sm bg-white/50 rounded-xl hover:bg-white transition-colors cursor-pointer border border-transparent hover:border-primary-container">
+<div class="w-8 h-8 rounded-full bg-tertiary/10 text-tertiary flex items-center justify-center">
+<span class="material-symbols-outlined text-sm">check</span>
+</div>
+<div class="flex-1">
+<p class="text-label-bold font-label-bold text-on-surface line-through opacity-50">Math Quiz #4</p>
+<p class="text-[10px] font-bold text-tertiary">+50 XP EARNED</p>
+</div>
+</div>
+<div class="group flex items-center gap-3 p-sm bg-white/50 rounded-xl hover:bg-white transition-colors cursor-pointer border border-transparent hover:border-secondary-container">
+<div class="w-8 h-8 rounded-full bg-secondary/10 text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-sm">play_arrow</span>
+</div>
+<div class="flex-1">
+<p class="text-label-bold font-label-bold text-on-surface">Grammar Game</p>
+<p class="text-[10px] font-bold text-on-surface-variant">EST: 10 MINS</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Global Leaderboard (Mini) -->
+<div class="glass-card rounded-xl p-md shadow-sm border-white/20 overflow-hidden">
+<h3 class="font-label-bold text-label-bold text-on-surface-variant mb-md">PET LEADERS</h3>
+<div class="space-y-4">
+<div class="flex items-center gap-3">
+<span class="font-bold text-primary w-4">1</span>
+<img alt="Friend Avatar" class="w-8 h-8 rounded-full border border-primary-container" data-alt="Small cute avatar of a cartoonish robotic bird pet in a futuristic digital room. Bright blue and white colors, sleek digital surfaces." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxdHsWKyxfeoQmAjL_w98ZKWOR_hnLwUT2wVINKO2tm_gprdqTjhyem5XZ3_rfQOY-l8UsiXpYulKv902GW_c4pahYXYIoEme3gW_Ppai9pgDg-X1qnaDZGpSXAbzk5uGwktiwKzTXhDeNZyqa13M6Tewzo5aM1sjZql6o1iUCC1Xvb75v0rctFvAev2yjJokXRktHu1B9PoiHAAlhxn4xYvyx5B8aJ3vXSlgqUYTsDFGOjiYSWS-DPZHfQG-9WbfQRe0XIJ1qwjPe">
+<span class="flex-1 text-label-bold font-label-bold">Zappy</span>
+<span class="text-secondary font-bold">1.8k</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="font-bold text-on-surface-variant w-4">2</span>
+<img alt="Friend Avatar" class="w-8 h-8 rounded-full border border-surface-variant" data-alt="Small cute avatar of a pink unicorn-like digital creature with large eyes, standing in a field of digital flowers. Dreamy soft-lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2DhLFXcawCCtCmEd0ZFeJAFwxMxnK8ucDejRs6KBhGLdsWiOnHgZELQHqN-De6_U-qUE5wosI3Aa0RkdfA_yZCNtrmvvf5C9mYItHRIa-7WXE2PLfaPvS3L3HHSHMys2yHEn0x8dYf1fkwocE3dbjrUGWioysBhEnAnmbk2C_vQir13JLlYgiNL032xTqYeV3Nhqn-AFgT5vgHdnkOfI2miV6uXFlUz_2IWLNbXOF1CsvG9sJC_6kJe-KEYzaurYZVlgMXtZSzU6M">
+<span class="flex-1 text-label-bold font-label-bold">Luna</span>
+<span class="text-secondary font-bold">1.5k</span>
+</div>
+<div class="flex items-center gap-3 bg-secondary-container/20 -mx-4 px-4 py-2">
+<span class="font-bold text-primary w-4">3</span>
+<img alt="Sparky Thumbnail" class="w-8 h-8 rounded-full border border-secondary" data-alt="Close up of Sparky, the blue owl-fox pet avatar." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMM1JjEcz-_rBX8R9DiaZwx_8kvAe-svoCU1HoUKVICP9f2TUWFOUVHH4IVeAEX80Yqu9el7PqMud7Jo85S5xAw3KIPdPmKngYNZLTTXLYYzIlm3tzaYh7HJI2laH_ACJsujA_C_bW0nMnBYWem5jmybB6s_Hk0g7J8dfzVN6RERFPJC2Snwvcq_mqBJ1XzDJubGsKW1I_9z12Y09ZTkR-PxnlTD4zNAjtYW_R5G-ae4Mve-FaHdypxUKO6nnBo0GdjfxaWcoi7WQQ">
+<span class="flex-1 text-label-bold font-label-bold">Sparky (You)</span>
+<span class="text-secondary font-bold">1.2k</span>
+</div>
+</div>
+<button class="w-full mt-4 py-2 rounded-lg bg-surface-variant/50 text-secondary text-label-bold font-label-bold hover:bg-surface-variant transition-colors">
+                    View Full Habitat
+                </button>
+</div>
+</aside>
+</main>
+<!-- SideNavBar (Contextual Admin/Nav) -->
+<nav class="hidden md:flex flex-col py-md h-screen w-64 fixed left-0 top-0 bg-surface-container-low/80 backdrop-blur-lg border-r border-white/10 shadow-xl z-[60] -translate-x-full hover:translate-x-0 transition-transform duration-500">
+<div class="px-md mb-xl">
+<span class="font-headline-md text-headline-md text-primary block">Admin Panel</span>
+<span class="text-on-surface-variant text-[12px] font-bold">Manage Habitat</span>
+</div>
+<div class="flex-1 space-y-1">
+<a class="bg-secondary-container text-on-secondary-container rounded-xl mx-2 p-3 flex items-center gap-3 shadow-[0_4px_0_0_rgba(0,93,184,0.3)] font-label-bold text-label-bold" href="#">
+<span class="material-symbols-outlined">school</span> Classroom
+            </a>
+<a class="text-on-surface-variant hover:bg-surface-variant/50 rounded-xl mx-2 p-3 flex items-center gap-3 transition-all font-label-bold text-label-bold" href="#">
+<span class="material-symbols-outlined">group</span> Students
+            </a>
+<a class="text-on-surface-variant hover:bg-surface-variant/50 rounded-xl mx-2 p-3 flex items-center gap-3 transition-all font-label-bold text-label-bold" href="#">
+<span class="material-symbols-outlined">leaderboard</span> Analytics
+            </a>
+<a class="text-on-surface-variant hover:bg-surface-variant/50 rounded-xl mx-2 p-3 flex items-center gap-3 transition-all font-label-bold text-label-bold" href="#">
+<span class="material-symbols-outlined">psychology</span> Behaviors
+            </a>
+<a class="text-on-surface-variant hover:bg-surface-variant/50 rounded-xl mx-2 p-3 flex items-center gap-3 transition-all font-label-bold text-label-bold" href="#">
+<span class="material-symbols-outlined">settings</span> Settings
+            </a>
+</div>
+<div class="px-2 mt-auto border-t border-white/10 pt-4">
+<a class="text-on-surface-variant hover:bg-surface-variant/50 rounded-xl p-3 flex items-center gap-3 transition-all font-label-bold text-label-bold" href="#">
+<span class="material-symbols-outlined">help</span> Support
+            </a>
+<a class="text-on-surface-variant hover:bg-surface-variant/50 rounded-xl p-3 flex items-center gap-3 transition-all font-label-bold text-label-bold" href="#">
+<span class="material-symbols-outlined">logout</span> Logout
+            </a>
+</div>
+</nav>
+<!-- FAB -->
+<button class="fixed bottom-8 right-8 w-16 h-16 bg-primary-container text-on-primary-container rounded-full shadow-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all z-50 border-b-4 border-primary/20">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">add</span>
+</button>
+<script>
+        function addSparkles() {
+            const container = document.getElementById('sparkle-container');
+            const colors = ['#ffe173', '#ffd93d', '#7bdb85', '#4c96fe'];
+            
+            for (let i = 0; i < 15; i++) {
+                const star = document.createElement('span');
+                star.className = 'material-symbols-outlined glitter-star';
+                star.innerText = 'grade';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.color = colors[Math.floor(Math.random() * colors.length)];
+                star.style.fontSize = (Math.random() * 20 + 10) + 'px';
+                star.style.animationDelay = (Math.random() * 1) + 's';
+                
+                container.appendChild(star);
+                
+                setTimeout(() => {
+                    star.remove();
+                }, 2000);
+            }
+
+            // Pet bounce effect
+            const pet = document.getElementById('pet-avatar');
+            pet.classList.add('animate-bounce');
+            setTimeout(() => pet.classList.remove('animate-bounce'), 1000);
+        }
+
+        // Periodic ambient sparkles
+        setInterval(() => {
+            if (Math.random() > 0.7) addSparkles();
+        }, 5000);
+    </script>
+
+
+</body></html>

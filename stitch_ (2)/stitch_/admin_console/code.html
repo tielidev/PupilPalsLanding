@@ -1,0 +1,454 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Pupil Pals Admin Console</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Be+Vietnam+Pro:wght@400;500;600&amp;family=Rubik:wght@600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+        .bouncy-button {
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 4px 0 0 rgba(0, 0, 0, 0.1);
+        }
+        .bouncy-button:hover {
+            transform: scale(1.05);
+        }
+        .bouncy-button:active {
+            transform: scale(0.95);
+            box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.1);
+        }
+        .progress-stripe {
+            background-image: linear-gradient(45deg, rgba(255,255,255,.15) 25%, transparent 25%, transparent 50%, rgba(255,255,255,.15) 50%, rgba(255,255,255,.15) 75%, transparent 75%, transparent);
+            background-size: 1rem 1rem;
+            animation: progress-bar-stripes 1s linear infinite;
+        }
+        @keyframes progress-bar-stripes {
+            from { background-position: 1rem 0; }
+            to { background-position: 0 0; }
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-tertiary-fixed-variant": "#00531d",
+                      "surface-variant": "#d5e3fc",
+                      "surface-container-high": "#dce9ff",
+                      "surface-tint": "#705d00",
+                      "tertiary-fixed-dim": "#7bdb85",
+                      "background": "#f8f9ff",
+                      "on-secondary": "#ffffff",
+                      "secondary-fixed-dim": "#a9c7ff",
+                      "surface-dim": "#ccdbf3",
+                      "on-primary-fixed-variant": "#554500",
+                      "primary": "#705d00",
+                      "on-tertiary": "#ffffff",
+                      "error-container": "#ffdad6",
+                      "surface-container-lowest": "#ffffff",
+                      "outline": "#7e7761",
+                      "on-secondary-fixed": "#001b3e",
+                      "on-background": "#0d1c2e",
+                      "tertiary-container": "#8ff199",
+                      "on-surface": "#0d1c2e",
+                      "surface-container-highest": "#d5e3fc",
+                      "surface-container-low": "#eff4ff",
+                      "outline-variant": "#d0c6ad",
+                      "inverse-surface": "#233144",
+                      "tertiary-fixed": "#96f89f",
+                      "on-error": "#ffffff",
+                      "primary-fixed-dim": "#e8c426",
+                      "inverse-primary": "#e8c426",
+                      "secondary-fixed": "#d6e3ff",
+                      "on-secondary-fixed-variant": "#00468c",
+                      "primary-fixed": "#ffe173",
+                      "surface-bright": "#f8f9ff",
+                      "on-surface-variant": "#4d4633",
+                      "on-tertiary-fixed": "#002107",
+                      "on-primary": "#ffffff",
+                      "secondary-container": "#4c96fe",
+                      "on-primary-fixed": "#221b00",
+                      "on-secondary-container": "#002e60",
+                      "on-tertiary-container": "#00702a",
+                      "error": "#ba1a1a",
+                      "secondary": "#005db8",
+                      "tertiary": "#006e29",
+                      "on-error-container": "#93000a",
+                      "surface-container": "#e6eeff",
+                      "surface": "#f8f9ff",
+                      "on-primary-container": "#725e00",
+                      "inverse-on-surface": "#eaf1ff",
+                      "primary-container": "#ffd93d"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "margin-mobile": "16px",
+                      "xs": "4px",
+                      "sm": "12px",
+                      "margin-desktop": "48px",
+                      "lg": "40px",
+                      "md": "24px",
+                      "xl": "64px",
+                      "gutter": "20px",
+                      "base": "8px"
+              },
+              "fontFamily": {
+                      "label-bold": ["Rubik"],
+                      "headline-md": ["Plus Jakarta Sans"],
+                      "body-md": ["Be Vietnam Pro"],
+                      "body-lg": ["Be Vietnam Pro"],
+                      "display-lg-mobile": ["Plus Jakarta Sans"],
+                      "display-lg": ["Plus Jakarta Sans"]
+              },
+              "fontSize": {
+                      "label-bold": ["14px", {"lineHeight": "20px", "fontWeight": "600"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "display-lg-mobile": ["32px", {"lineHeight": "40px", "fontWeight": "800"}],
+                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-background font-body-md text-on-background min-h-screen">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full bg-surface/70 backdrop-blur-xl border-b border-white/20 shadow-md flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 w-full z-50">
+<div class="font-display-lg text-display-lg-mobile md:text-display-lg font-extrabold text-primary tracking-tight">Pupil Pals</div>
+<nav class="hidden md:flex gap-md items-center">
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors hover:scale-105 transition-transform duration-200" href="#">Main Display</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors hover:scale-105 transition-transform duration-200" href="#">Dashboard</a>
+<a class="text-secondary font-bold border-b-2 border-secondary pb-1 hover:scale-105 transition-transform duration-200" href="#">Admin</a>
+</nav>
+<div class="flex items-center gap-sm">
+<button class="material-symbols-outlined text-primary p-2 hover:scale-105 transition-all cursor-pointer">notifications</button>
+<button class="material-symbols-outlined text-primary p-2 hover:scale-105 transition-all cursor-pointer">settings</button>
+<div class="h-10 w-10 rounded-full border-2 border-primary overflow-hidden shadow-sm">
+<img alt="Teacher profile avatar" data-alt="A friendly profile portrait of a smiling young teacher with professional attire, set against a soft bokeh background of a brightly lit modern digital classroom. The lighting is warm and welcoming, reflecting a professional yet approachable educator in a high-tech academic environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAFQKpWYvHH4s6YkdLbq2KegzYTojMkJ1DkO_x6gnu0noxlzysLMjnBjXZ_0ovnIOBnKrg1xG-RdlX0ygncijz9vVxqkCqSUciDEKAbsWdwv7m0eYFkXelzGW7sPYA8KUkFdebah7FDEamR8nbnHggfJJp6Lz98JeU5hpH2cmKGszMEk3XLBcDpY_JiwCTI3DqKjMLTgvndaCI7eMTXdtnr5RKgltiRRDjLIubnhfcAh0kGeIXlOjT1a4EYUFxftTDBZ2ow7jOTdwde">
+</div>
+</div>
+</header>
+<!-- SideNavBar (Desktop Only) -->
+<aside class="hidden md:flex h-screen w-64 fixed left-0 top-0 bg-surface-container-low/80 backdrop-blur-lg border-r border-white/10 shadow-xl flex flex-col py-md pt-24 z-40">
+<div class="px-6 mb-8">
+<div class="flex items-center gap-3 mb-2">
+<span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">pets</span>
+<span class="font-headline-md text-headline-md text-primary">Admin Panel</span>
+</div>
+<p class="text-on-surface-variant text-sm">Manage Habitat</p>
+</div>
+<nav class="flex-1 space-y-2">
+<a class="text-on-surface-variant hover:bg-surface-variant/50 rounded-xl mx-2 p-3 flex items-center gap-3 transition-all hover:translate-x-1" href="#">
+<span class="material-symbols-outlined">school</span>
+<span class="font-label-bold text-label-bold">Classroom</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-variant/50 rounded-xl mx-2 p-3 flex items-center gap-3 transition-all hover:translate-x-1" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-label-bold text-label-bold">Students</span>
+</a>
+<a class="bg-secondary-container text-on-secondary-container rounded-xl mx-2 p-3 flex items-center gap-3 shadow-[0_4px_0_0_rgba(0,93,184,0.3)]" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">leaderboard</span>
+<span class="font-label-bold text-label-bold">Analytics</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-variant/50 rounded-xl mx-2 p-3 flex items-center gap-3 transition-all hover:translate-x-1" href="#">
+<span class="material-symbols-outlined">psychology</span>
+<span class="font-label-bold text-label-bold">Behaviors</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-variant/50 rounded-xl mx-2 p-3 flex items-center gap-3 transition-all hover:translate-x-1" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-bold text-label-bold">Settings</span>
+</a>
+</nav>
+<div class="px-2 mt-auto pt-4 border-t border-white/10">
+<a class="text-on-surface-variant hover:bg-surface-variant/50 rounded-xl p-3 flex items-center gap-3 transition-all" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-bold text-label-bold">Support</span>
+</a>
+<a class="text-error hover:bg-error-container/20 rounded-xl p-3 flex items-center gap-3 transition-all" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-bold text-label-bold">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="md:pl-64 pt-24 min-h-screen px-margin-mobile md:px-margin-desktop pb-12">
+<div class="max-w-7xl mx-auto">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-lg gap-md">
+<div>
+<h1 class="font-display-lg text-display-lg-mobile md:text-headline-md text-on-background">Habitat Configuration</h1>
+<p class="text-on-surface-variant font-body-md mt-1">Adjust the core mechanics of the Pupil Pals ecosystem.</p>
+</div>
+<button class="bouncy-button bg-primary text-on-primary px-md py-sm rounded-full font-label-bold flex items-center gap-2 shadow-[0_4px_0_0_#554500]">
+<span class="material-symbols-outlined">add</span>
+                    Create New Pet Species
+                </button>
+</div>
+<!-- Dashboard Grid -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Pet Library Section (Bento Style) -->
+<section class="md:col-span-8 space-y-gutter">
+<div class="glass-card rounded-[2rem] p-md shadow-md border-primary/10">
+<div class="flex justify-between items-center mb-md">
+<h2 class="font-headline-md text-headline-md text-primary flex items-center gap-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+                                Active Pet Species
+                            </h2>
+<div class="flex gap-2">
+<button class="p-2 hover:bg-surface-variant/50 rounded-full transition-colors"><span class="material-symbols-outlined">filter_list</span></button>
+<button class="p-2 hover:bg-surface-variant/50 rounded-full transition-colors"><span class="material-symbols-outlined">search</span></button>
+</div>
+</div>
+<!-- Custom Admin Table with Playful Touch -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-separate border-spacing-y-3">
+<thead>
+<tr class="text-on-surface-variant font-label-bold text-sm">
+<th class="px-4 py-2">Pet Name</th>
+<th class="px-4 py-2">Stage</th>
+<th class="px-4 py-2">Rarity</th>
+<th class="px-4 py-2">Action</th>
+</tr>
+</thead>
+<tbody>
+<tr class="bg-surface-container-low hover:bg-surface-container transition-all group rounded-xl">
+<td class="px-4 py-4 rounded-l-xl">
+<div class="flex items-center gap-3">
+<div class="h-12 w-12 rounded-full border-2 border-tertiary-fixed-dim bg-white flex items-center justify-center shadow-sm overflow-hidden">
+<img alt="Dino Pet" data-alt="A cute, stylized 3D rendered dinosaur character with bright green scales and friendly big eyes, standing in a playful pose. The background is a soft-focus digital meadow with floating glowing particles, adhering to a cheerful and educational aesthetic for primary school students. High-quality digital art style with vibrant colors." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDaQE8Mz5Z6H58kD-uE8lAntbXo94nNsEgM9dRuQhV86RndZ0gm58jXtd-3VSfYMWcPuZMPvFHYfyQ3mRRsZJhoGEeOpktkRc41cO5MVJYuXI7wSnOB363uwiAdtStx5kyubsRfGuIf-EtGYqRTBKKJCAzG6CI8Q37QrZx4BI3if29YO1BY5sqYupmxzqH9aDMnV4navfSzCE0Je80jObbdzm3OggdrqZOdp7qPqbZZyjxa5XoSjFOpQLsXFC3V5Fe8VQgcyGqvTxD1">
+</div>
+<div>
+<div class="font-label-bold text-on-surface">Sprout Dino</div>
+<div class="text-xs text-on-surface-variant">Species: Saurian</div>
+</div>
+</div>
+</td>
+<td class="px-4 py-4">
+<div class="flex items-center gap-2">
+<span class="bg-tertiary-container text-on-tertiary-container text-xs px-2 py-1 rounded-full font-label-bold">Stage 2: Hatchling</span>
+</div>
+</td>
+<td class="px-4 py-4">
+<div class="flex items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-sm font-label-bold">Common</span>
+</div>
+</td>
+<td class="px-4 py-4 rounded-r-xl">
+<div class="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 hover:bg-secondary-container/20 rounded-full text-secondary"><span class="material-symbols-outlined">edit</span></button>
+<button class="p-2 hover:bg-error-container/20 rounded-full text-error"><span class="material-symbols-outlined">delete</span></button>
+</div>
+</td>
+</tr>
+<tr class="bg-surface-container-low hover:bg-surface-container transition-all group rounded-xl">
+<td class="px-4 py-4 rounded-l-xl">
+<div class="flex items-center gap-3">
+<div class="h-12 w-12 rounded-full border-2 border-secondary-fixed-dim bg-white flex items-center justify-center shadow-sm overflow-hidden">
+<img alt="Owl Pet" data-alt="A whimsical digital owl pet with feathers in shades of deep blue and violet, featuring large expressive eyes and a tiny academic cap. The creature is illustrated in a soft-tactile 3D style, positioned against a starry night sky backdrop within a circular glass frame. The mood is curious and academic, perfect for a digital habitat environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcl4Sd-jPq1jw5dFh8o2ov84Av4HYllwNCCVQKu1e0Xhs4QpV2-OmsSFeqlzobLJ8pmli4bL9BngGvI9RVW1Rcbc7eYLF3ZuzmmAT3ILhUwGyGthbvt0ChS7wT5jd72dBVyEL1DcZX0Qz1RcKby_L3MHK0eCcw5DLrsvnfuCZ2J7Ak-fcYoDQHJaYCSfEpWwd9JBbGcncKFmiZMhgFk9FTKlTBCTc_kggAPDJ9Y1ZuKWcSiSycUv_3hfgP5glvHT83kh_vWIIjieOC">
+</div>
+<div>
+<div class="font-label-bold text-on-surface">Sage Owl</div>
+<div class="text-xs text-on-surface-variant">Species: Avian</div>
+</div>
+</div>
+</td>
+<td class="px-4 py-4">
+<span class="bg-primary-container text-on-primary-container text-xs px-2 py-1 rounded-full font-label-bold">Stage 3: Juvenile</span>
+</td>
+<td class="px-4 py-4">
+<div class="flex items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-sm font-label-bold">Rare</span>
+</div>
+</td>
+<td class="px-4 py-4 rounded-r-xl">
+<div class="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 hover:bg-secondary-container/20 rounded-full text-secondary"><span class="material-symbols-outlined">edit</span></button>
+<button class="p-2 hover:bg-error-container/20 rounded-full text-error"><span class="material-symbols-outlined">delete</span></button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Upload Area for Stages -->
+<div class="glass-card rounded-[2rem] p-md shadow-md">
+<h3 class="font-headline-md text-on-surface mb-sm">Evolution Asset Upload</h3>
+<p class="text-on-surface-variant mb-md">Add images for different growth levels. 128x128px PNG recommended.</p>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-md">
+<div class="aspect-square rounded-2xl border-2 border-dashed border-outline-variant flex flex-col items-center justify-center text-on-surface-variant hover:border-primary hover:text-primary transition-all cursor-pointer bg-surface-container-lowest/50">
+<span class="material-symbols-outlined text-3xl mb-1">upload</span>
+<span class="text-xs font-label-bold">Stage 1: Egg</span>
+</div>
+<div class="aspect-square rounded-2xl border-2 border-dashed border-outline-variant flex flex-col items-center justify-center text-on-surface-variant hover:border-primary hover:text-primary transition-all cursor-pointer bg-surface-container-lowest/50">
+<span class="material-symbols-outlined text-3xl mb-1">upload</span>
+<span class="text-xs font-label-bold">Stage 2: Baby</span>
+</div>
+<div class="aspect-square rounded-2xl border-2 border-dashed border-outline-variant flex flex-col items-center justify-center text-on-surface-variant hover:border-primary hover:text-primary transition-all cursor-pointer bg-surface-container-lowest/50">
+<span class="material-symbols-outlined text-3xl mb-1">upload</span>
+<span class="text-xs font-label-bold">Stage 3: Adult</span>
+</div>
+<div class="aspect-square rounded-2xl border-2 border-dashed border-outline-variant flex flex-col items-center justify-center text-on-surface-variant hover:border-primary hover:text-primary transition-all cursor-pointer bg-surface-container-lowest/50">
+<span class="material-symbols-outlined text-3xl mb-1">upload</span>
+<span class="text-xs font-label-bold">Stage 4: Elder</span>
+</div>
+</div>
+</div>
+</section>
+<!-- System Settings Sidebar -->
+<section class="md:col-span-4 space-y-gutter">
+<!-- Probability Settings -->
+<div class="glass-card rounded-[2rem] p-md shadow-md border-secondary/10 overflow-hidden relative">
+<div class="absolute -top-4 -right-4 h-24 w-24 bg-secondary/10 rounded-full blur-2xl"></div>
+<h3 class="font-headline-md text-headline-md text-secondary mb-md flex items-center gap-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">casino</span>
+                            Probability
+                        </h3>
+<div class="space-y-6">
+<div>
+<div class="flex justify-between mb-2">
+<label class="font-label-bold text-on-surface-variant">Rare Drop Rate</label>
+<span class="text-secondary font-bold">12%</span>
+</div>
+<div class="h-3 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-secondary progress-stripe w-[12%] rounded-full"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between mb-2">
+<label class="font-label-bold text-on-surface-variant">Evolution Success</label>
+<span class="text-secondary font-bold">85%</span>
+</div>
+<div class="h-3 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-secondary progress-stripe w-[85%] rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- XP & Thresholds -->
+<div class="glass-card rounded-[2rem] p-md shadow-md">
+<h3 class="font-headline-md text-headline-md text-primary mb-md flex items-center gap-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">trending_up</span>
+                            Leveling Logic
+                        </h3>
+<div class="space-y-4">
+<div class="space-y-1">
+<label class="text-xs font-label-bold text-on-surface-variant uppercase tracking-wider">XP Multiplier</label>
+<input class="w-full accent-primary h-2 bg-surface-container rounded-lg appearance-none cursor-pointer" type="range">
+</div>
+<div class="flex gap-4">
+<div class="flex-1 p-3 bg-surface-container-low rounded-2xl border border-white/20">
+<div class="text-[10px] font-label-bold text-on-surface-variant uppercase">Mood Decay</div>
+<div class="text-headline-md font-bold text-primary">0.5%/h</div>
+</div>
+<div class="flex-1 p-3 bg-surface-container-low rounded-2xl border border-white/20">
+<div class="text-[10px] font-label-bold text-on-surface-variant uppercase">Min XP/Task</div>
+<div class="text-headline-md font-bold text-primary">100</div>
+</div>
+</div>
+</div>
+<button class="w-full mt-6 bg-surface-container-highest text-on-surface font-label-bold py-3 rounded-2xl hover:bg-surface-variant transition-colors bouncy-button">
+                            Recalculate Economy
+                        </button>
+</div>
+<!-- User Management Preview -->
+<div class="glass-card rounded-[2rem] p-md shadow-md">
+<div class="flex justify-between items-center mb-md">
+<h3 class="font-headline-md text-on-surface">Teacher Access</h3>
+<span class="bg-tertiary-container text-on-tertiary-container text-[10px] px-2 py-0.5 rounded-full font-bold">14 ACTIVE</span>
+</div>
+<div class="space-y-3">
+<div class="flex items-center gap-3 p-2 hover:bg-white/40 rounded-xl transition-all cursor-pointer">
+<img alt="Teacher icon" class="h-10 w-10 rounded-full bg-primary-container p-1" data-alt="A bright and colorful digital illustration of a smiling teacher avatar, wearing modern glasses and a yellow sweater. The character is set against a vibrant workspace with floating books and pencils. The lighting is sunny and optimistic, designed with a clean vector art style that appeals to educators and students alike." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfh1qlGJW7tJ0xGSg2pbZSNzNy2YYpsfCoCbK_rkV5lg3FjxmQ4ErAlHu-DWvMzKXwk-XULcQ889uTI0nX83mtgJBFYabbqPdPMrDfj6B8c21amgIAVZUHTmQ0UjQCGRLhGUQml64sZNpxqQ1mm_6B-FrK7-yX_t40TlNkAg8MSJVNUomObynWTsZ03yO9hGtvMNUdnP7WIZ1iP8U5_PVLKHUq1WtQBZyW4npU0Tshuga_eOXbnUyXvxzSBZzrlLQmo0r_WO29ti65">
+<div>
+<div class="font-label-bold text-on-surface text-sm">Mrs. Robinson</div>
+<div class="text-[10px] text-on-surface-variant">Classroom 4B • Lead Admin</div>
+</div>
+<span class="material-symbols-outlined ml-auto text-on-surface-variant text-sm">chevron_right</span>
+</div>
+<div class="flex items-center gap-3 p-2 hover:bg-white/40 rounded-xl transition-all cursor-pointer">
+<img alt="Teacher icon" class="h-10 w-10 rounded-full bg-secondary-container p-1" data-alt="A charismatic digital teacher avatar with a short beard and a friendly expression, wearing a lab coat and holding a small digital tablet. The character is illuminated by soft cool lighting in a futuristic lab setting. The art style is polished and high-energy, with smooth gradients and playful proportions." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhMKrz_zhGEAtDm0wd9STz3n-Q2UQ5W4cocSNF7iM3chqizxwhJEGPC1GNnU_M6pABTHf1dMwgH6U6QkKFuW9_gWTRpgC9EJqql__OwJYBz_55tI4TNI2DCHHBwN59kWbM0HAyUB2P_Z4a3dNt6wGX0Ru63rsxQIt0DEM1pbW-_d4PtevikUVepM2Mq3bOfFGNH1myNqKINfFWLsN5BuMMmXZ87I-1LyVJJrGMFownOXXEJrsnlCCi6EmvFEu5a3oMhNcdZeCfp3i-">
+<div>
+<div class="font-label-bold text-on-surface text-sm">Mr. Henderson</div>
+<div class="text-[10px] text-on-surface-variant">Science Lab • Moderator</div>
+</div>
+<span class="material-symbols-outlined ml-auto text-on-surface-variant text-sm">chevron_right</span>
+</div>
+</div>
+<button class="w-full mt-4 border-2 border-primary/20 text-primary font-label-bold py-2 rounded-2xl hover:bg-primary/5 transition-colors">
+                            Manage All Users
+                        </button>
+</div>
+</section>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full bg-surface-container-low/80 backdrop-blur-lg flex justify-around items-center py-3 z-50 border-t border-white/10">
+<button class="flex flex-col items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined">school</span>
+<span class="text-[10px] font-label-bold">Classes</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined">group</span>
+<span class="text-[10px] font-label-bold">Students</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-secondary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">leaderboard</span>
+<span class="text-[10px] font-label-bold">Admin</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-[10px] font-label-bold">Settings</span>
+</button>
+</nav>
+<!-- Interactive FAB (Contextual for Home/Admin) -->
+<div class="fixed bottom-24 right-margin-mobile md:bottom-12 md:right-margin-desktop z-50">
+<button class="h-16 w-16 bg-primary text-on-primary rounded-full shadow-[0_8px_0_0_#554500] hover:translate-y-1 hover:shadow-[0_4px_0_0_#554500] active:translate-y-2 active:shadow-none transition-all flex items-center justify-center group">
+<span class="material-symbols-outlined text-3xl group-hover:rotate-90 transition-transform duration-300">add</span>
+</button>
+</div>
+<script>
+        // Simple interactivity for demonstration
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-4px)';
+                card.style.transition = 'transform 0.3s ease';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Search highlight simulation
+        const searchBtn = document.querySelector('button .material-symbols-outlined:contains("search")');
+        if(searchBtn) {
+            searchBtn.parentElement.addEventListener('click', () => {
+                alert('Search mode activated: Filter species library');
+            });
+        }
+    </script>
+
+
+</body></html>

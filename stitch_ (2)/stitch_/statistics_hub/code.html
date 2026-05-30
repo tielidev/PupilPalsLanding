@@ -1,0 +1,507 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Pupil Pals - Statistics Hub</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Be+Vietnam+Pro:wght@400;500;700&amp;family=Rubik:wght@400;500;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-fixed-variant": "#00531d",
+                    "surface-variant": "#d5e3fc",
+                    "surface-container-high": "#dce9ff",
+                    "surface-tint": "#705d00",
+                    "tertiary-fixed-dim": "#7bdb85",
+                    "background": "#f8f9ff",
+                    "on-secondary": "#ffffff",
+                    "secondary-fixed-dim": "#a9c7ff",
+                    "surface-dim": "#ccdbf3",
+                    "on-primary-fixed-variant": "#554500",
+                    "primary": "#705d00",
+                    "on-tertiary": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "surface-container-lowest": "#ffffff",
+                    "outline": "#7e7761",
+                    "on-secondary-fixed": "#001b3e",
+                    "on-background": "#0d1c2e",
+                    "tertiary-container": "#8ff199",
+                    "on-surface": "#0d1c2e",
+                    "surface-container-highest": "#d5e3fc",
+                    "surface-container-low": "#eff4ff",
+                    "outline-variant": "#d0c6ad",
+                    "inverse-surface": "#233144",
+                    "tertiary-fixed": "#96f89f",
+                    "on-error": "#ffffff",
+                    "primary-fixed-dim": "#e8c426",
+                    "inverse-primary": "#e8c426",
+                    "secondary-fixed": "#d6e3ff",
+                    "on-secondary-fixed-variant": "#00468c",
+                    "primary-fixed": "#ffe173",
+                    "surface-bright": "#f8f9ff",
+                    "on-surface-variant": "#4d4633",
+                    "on-tertiary-fixed": "#002107",
+                    "on-primary": "#ffffff",
+                    "secondary-container": "#4c96fe",
+                    "on-primary-fixed": "#221b00",
+                    "on-secondary-container": "#002e60",
+                    "on-tertiary-container": "#00702a",
+                    "error": "#ba1a1a",
+                    "secondary": "#005db8",
+                    "tertiary": "#006e29",
+                    "on-error-container": "#93000a",
+                    "surface-container": "#e6eeff",
+                    "surface": "#f8f9ff",
+                    "on-primary-container": "#725e00",
+                    "inverse-on-surface": "#eaf1ff",
+                    "primary-container": "#ffd93d"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-mobile": "16px",
+                    "xs": "4px",
+                    "sm": "12px",
+                    "margin-desktop": "48px",
+                    "lg": "40px",
+                    "md": "24px",
+                    "xl": "64px",
+                    "gutter": "20px",
+                    "base": "8px"
+            },
+            "fontFamily": {
+                    "label-bold": ["Rubik"],
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "body-md": ["Be Vietnam Pro"],
+                    "body-lg": ["Be Vietnam Pro"],
+                    "display-lg-mobile": ["Plus Jakarta Sans"],
+                    "display-lg": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "label-bold": ["14px", {"lineHeight": "20px", "fontWeight": "600"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "display-lg-mobile": ["32px", {"lineHeight": "40px", "fontWeight": "800"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+        }
+        .bouncy-hover { transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1); }
+        .bouncy-hover:hover { transform: scale(1.05); }
+        .reward-glow-blue { filter: drop-shadow(0 0 8px rgba(76, 150, 254, 0.4)); }
+        .reward-glow-gold { filter: drop-shadow(0 0 8px rgba(255, 217, 61, 0.4)); }
+        .progress-stripe {
+            background-image: linear-gradient(45deg, rgba(255,255,255,.15) 25%, transparent 25%, transparent 50%, rgba(255,255,255,.15) 50%, rgba(255,255,255,.15) 75%, transparent 75%, transparent);
+            background-size: 1rem 1rem;
+            animation: progress-move 1s linear infinite;
+        }
+        @keyframes progress-move {
+            from { background-position: 1rem 0; }
+            to { background-position: 0 0; }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen font-body-md overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full bg-surface/70 backdrop-blur-xl flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 z-50 border-b border-white/20 shadow-md">
+<div class="font-display-lg text-display-lg-mobile font-extrabold text-primary tracking-tight md:text-display-lg">Pupil Pals</div>
+<nav class="hidden md:flex gap-8 items-center">
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors hover:scale-105 duration-200" href="#">Main Display</a>
+<a class="text-secondary font-bold border-b-2 border-secondary pb-1 hover:scale-105 duration-200" href="#">Dashboard</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors hover:scale-105 duration-200" href="#">Admin</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-primary cursor-pointer active:scale-95 hover:scale-105 transition-transform duration-200">notifications</button>
+<button class="material-symbols-outlined text-primary cursor-pointer active:scale-95 hover:scale-105 transition-transform duration-200">settings</button>
+<img alt="Teacher profile avatar" class="w-10 h-10 rounded-full border-2 border-primary-container object-cover" data-alt="A professional and friendly female teacher avatar with a warm smile, wearing a modern smart-casual outfit. She is positioned against a clean, softly blurred educational background that maintains the light-mode aesthetic of Pet Academy. The lighting is bright and cheerful, reinforcing a supportive learning environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBiwfemUJAfS0DeJ7lw0SmXJ6G2PG8dibtetnD47ili6J4PS8j2yyd7T93zwSwavIGVx03J-egQeGYEMbiYtiEemVF6QQCVY1JofG2L44Sfmulria_IcokwRmmK4YAF17B9KcNJBfSzQtlJofEzgIbw___Z4VYZlZIN_SVeGz8PYtvfweGj8tYPU7MX5EtgT-OGjY1QNhQKqhCDM-y69Wf1qKFT7O_XsFP52Pg6GbdGaLqQK8DkyGfEOWQ5WB2_dg2F5SahhNCCPzta">
+</div>
+</header>
+<!-- SideNavBar -->
+<aside class="hidden md:flex flex-col h-screen w-64 fixed left-0 top-0 bg-surface-container-low/80 backdrop-blur-lg border-r border-white/10 shadow-xl py-md z-40 pt-24">
+<div class="px-6 mb-8 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-3xl">pets</span>
+<div>
+<h2 class="font-headline-md text-headline-md text-primary text-lg">Admin Panel</h2>
+<p class="text-xs text-on-surface-variant opacity-70">Manage Habitat</p>
+</div>
+</div>
+<div class="flex-grow flex flex-col gap-2">
+<a class="text-on-surface-variant hover:bg-surface-variant/50 rounded-xl mx-2 p-3 flex items-center gap-3 transition-all hover:translate-x-1" href="#">
+<span class="material-symbols-outlined">school</span>
+<span class="font-label-bold text-label-bold">Classroom</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-variant/50 rounded-xl mx-2 p-3 flex items-center gap-3 transition-all hover:translate-x-1" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-label-bold text-label-bold">Students</span>
+</a>
+<a class="bg-secondary-container text-on-secondary-container rounded-xl mx-2 p-3 flex items-center gap-3 shadow-[0_4px_0_0_rgba(0,93,184,0.3)] transition-all" href="#">
+<span class="material-symbols-outlined">leaderboard</span>
+<span class="font-label-bold text-label-bold">Analytics</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-variant/50 rounded-xl mx-2 p-3 flex items-center gap-3 transition-all hover:translate-x-1" href="#">
+<span class="material-symbols-outlined">psychology</span>
+<span class="font-label-bold text-label-bold">Behaviors</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-variant/50 rounded-xl mx-2 p-3 flex items-center gap-3 transition-all hover:translate-x-1" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-bold text-label-bold">Settings</span>
+</a>
+</div>
+<button class="mx-4 mb-8 py-3 bg-primary text-on-primary rounded-full font-label-bold flex items-center justify-center gap-2 shadow-lg bouncy-hover border-b-4 border-on-primary-fixed-variant">
+<span class="material-symbols-outlined">add_circle</span>
+            New Student
+        </button>
+<div class="border-t border-white/10 pt-4 flex flex-col gap-2">
+<a class="text-on-surface-variant hover:bg-surface-variant/50 rounded-xl mx-2 p-3 flex items-center gap-3 transition-all" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-bold text-label-bold">Support</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-variant/50 rounded-xl mx-2 p-3 flex items-center gap-3 transition-all" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-bold text-label-bold">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="md:ml-64 pt-24 pb-12 px-margin-mobile md:px-margin-desktop">
+<!-- Header Section -->
+<div class="mb-10 flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
+<div>
+<h1 class="font-display-lg text-display-lg-mobile md:text-display-lg text-on-background">Statistics Hub</h1>
+<p class="text-on-surface-variant text-body-lg font-body-lg">Real-time habitat performance and student milestones.</p>
+</div>
+<div class="flex gap-2">
+<div class="bg-primary-container px-4 py-2 rounded-full flex items-center gap-2 shadow-sm border-b-2 border-on-primary-fixed-variant">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">stars</span>
+<span class="font-label-bold text-on-primary-container">Total Class XP: 12,450</span>
+</div>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Key Metrics -->
+<div class="md:col-span-8 grid grid-cols-1 sm:grid-cols-3 gap-gutter">
+<!-- Metric 1: Most Improved -->
+<div class="glass-card p-6 rounded-3xl bouncy-hover relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-6xl">trending_up</span>
+</div>
+<p class="text-on-surface-variant text-sm font-label-bold mb-2">Most Improved</p>
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full bg-secondary-container/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary">person</span>
+</div>
+<div>
+<h3 class="font-headline-md text-secondary text-lg">Leo Chen</h3>
+<p class="text-xs text-on-surface-variant">+24% growth</p>
+</div>
+</div>
+</div>
+<!-- Metric 2: Positive Behavior -->
+<div class="glass-card p-6 rounded-3xl bouncy-hover relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-6xl">favorite</span>
+</div>
+<p class="text-on-surface-variant text-sm font-label-bold mb-2">Top Behavior</p>
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full bg-tertiary-container/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary">handshake</span>
+</div>
+<div>
+<h3 class="font-headline-md text-tertiary text-lg">Helping Peers</h3>
+<p class="text-xs text-on-surface-variant">85 instances</p>
+</div>
+</div>
+</div>
+<!-- Metric 3: Evolution Progress -->
+<div class="glass-card p-6 rounded-3xl bouncy-hover relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-6xl">auto_awesome</span>
+</div>
+<p class="text-on-surface-variant text-sm font-label-bold mb-2">Next Evolution</p>
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full bg-primary-container/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">egg</span>
+</div>
+<div>
+<h3 class="font-headline-md text-primary text-lg">48h Rem.</h3>
+<p class="text-xs text-on-surface-variant">Class Level 12</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Leaderboard -->
+<div class="md:col-span-4 md:row-span-2 glass-card rounded-3xl overflow-hidden flex flex-col">
+<div class="p-6 bg-surface-container-high/50 border-b border-white/20">
+<h2 class="font-headline-md text-on-background flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">emoji_events</span>
+                        Top Performers
+                    </h2>
+</div>
+<div class="flex-grow overflow-y-auto p-4 space-y-3">
+<!-- Rank 1 -->
+<div class="flex items-center justify-between p-3 bg-primary-container/20 rounded-2xl border border-primary/10 transition-transform hover:scale-[1.02] cursor-default">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold text-sm">1</div>
+<img alt="Student avatar" class="w-10 h-10 rounded-full object-cover" data-alt="A portrait of a smiling young boy with curly hair, representing a student avatar. He is set against a bright, colorful background with playful pet-themed illustrations in the distance. The lighting is soft and high-key, matching the joyful, academic Pet Academy theme." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnrNcdFekcA0pcW2m-OCWP3ph_5DyqgxfS89utj9ZmCXzbNKmp5JBfJyKt1tZ2hVQr1kPqDwhKWrAsi38vLleKz-RNQj0R-sxFXzhhBb-m8PjZv6HgxkwH7WIHsD8MMPpSqxGJra4dvA2GZ0AFKCRf9iDE9q-sOOWJ--ZCI6JDz2SAP_HtYFmwnGPKZ2t8Jr0bv8mrhNbZHiEXjcuRawJbv08YF4lDvtuvxhu2QiMrYKcir0PI5pHSUcymA6JUUe2Cq1DiHUDsmdnA">
+<span class="font-label-bold text-on-surface">Maya R.</span>
+</div>
+<div class="text-right">
+<p class="text-primary font-bold">2,450</p>
+<span class="text-[10px] uppercase font-bold text-on-surface-variant">XP</span>
+</div>
+</div>
+<!-- Rank 2 -->
+<div class="flex items-center justify-between p-3 hover:bg-surface-variant/30 rounded-2xl transition-colors cursor-default">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-secondary text-on-secondary flex items-center justify-center font-bold text-sm">2</div>
+<img alt="Student avatar" class="w-10 h-10 rounded-full object-cover" data-alt="A portrait of a cheerful middle-school student with a friendly expression. The background features a subtle digital pet habitat theme with bright colors and soft focus. The overall atmosphere is encouraging and academic, utilizing Pet Academy's core visual tokens." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqTGWyjkzTDCWlq3D-XYde4JwqOHYkyAiu822DGlDlePfKCwoxNcxT_kR5BqFHaqocdTaHrvgskNFiFhrcQfY-aMmKZa6tiNCi63C6uBFia5QU0KCG5zSWcN35binz3-7wgcuhZaPsdmQA8G6uUdg7Y7RKs2R5t3hZ53MxTyAc_MR1-6IwFGcNN5tu8PE8UHn576JwYAeQ3HvVlinrHaN6CcykS3pHbN5B8u_TCIfMqyat4rZLRt7dMQyjxLtWvA4BXthqyAOHx5pc">
+<span class="font-label-bold text-on-surface">Julian K.</span>
+</div>
+<div class="text-right">
+<p class="text-secondary font-bold">2,120</p>
+<span class="text-[10px] uppercase font-bold text-on-surface-variant">XP</span>
+</div>
+</div>
+<!-- Rank 3 -->
+<div class="flex items-center justify-between p-3 hover:bg-surface-variant/30 rounded-2xl transition-colors cursor-default">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-tertiary text-on-tertiary flex items-center justify-center font-bold text-sm">3</div>
+<img alt="Student avatar" class="w-10 h-10 rounded-full object-cover" data-alt="A smiling young girl with glasses, appearing curious and engaged. She is an avatar for a top student in the Pet Academy app. The setting is bright and clean with a modern school-at-home feel, using high-end digital polish and soft lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBv_a3pv15eoQ82UitaHaFRrCWIILxRnd6nlM1WRk62SPrNIswEfB8ZlTBdg59sNQkKN0L76ktWNNdTyVdhbdFy-eLyy-x_5bQ8gbBeKu4TWwYp5xHuUpnW0x3tw-apvJ9E-GRlj4UlvK252c5YAGqAYAfwq86KPMdsMCeTyJiNbR21oMuf9jQnaVAeaJzndbtTDHuq81yHZvnmVdczwxjoxUmwLeek5nvzwzCi8ilGGx0yH4gDn5uaA5g5x6pZ0euMXoHsRMoKf4it">
+<span class="font-label-bold text-on-surface">Elena V.</span>
+</div>
+<div class="text-right">
+<p class="text-tertiary font-bold">1,980</p>
+<span class="text-[10px] uppercase font-bold text-on-surface-variant">XP</span>
+</div>
+</div>
+<!-- Others (Loop placeholder) -->
+<div class="px-3 py-2 space-y-4 pt-2">
+<div class="flex items-center justify-between opacity-70">
+<div class="flex items-center gap-3">
+<span class="w-8 text-center text-xs font-bold text-on-surface-variant">4</span>
+<span class="text-sm font-medium">Sam T.</span>
+</div>
+<span class="text-xs font-bold">1,850</span>
+</div>
+<div class="flex items-center justify-between opacity-70">
+<div class="flex items-center gap-3">
+<span class="w-8 text-center text-xs font-bold text-on-surface-variant">5</span>
+<span class="text-sm font-medium">Liam O.</span>
+</div>
+<span class="text-xs font-bold">1,720</span>
+</div>
+<div class="flex items-center justify-between opacity-70">
+<div class="flex items-center gap-3">
+<span class="w-8 text-center text-xs font-bold text-on-surface-variant">6</span>
+<span class="text-sm font-medium">Chloe S.</span>
+</div>
+<span class="text-xs font-bold">1,640</span>
+</div>
+<div class="flex items-center justify-between opacity-70">
+<div class="flex items-center gap-3">
+<span class="w-8 text-center text-xs font-bold text-on-surface-variant">7</span>
+<span class="text-sm font-medium">Zoe B.</span>
+</div>
+<span class="text-xs font-bold">1,510</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Charts Section 1: Level Distribution -->
+<div class="md:col-span-4 glass-card p-6 rounded-3xl">
+<h3 class="font-headline-md text-on-background mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">donut_large</span>
+                    Level Spread
+                </h3>
+<div class="relative w-48 h-48 mx-auto flex items-center justify-center">
+<!-- Fake SVG Pie Chart -->
+<svg class="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
+<path class="text-surface-container-highest" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="100, 100" stroke-width="6"></path>
+<path class="text-primary" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="35, 100" stroke-width="6"></path>
+<path class="text-secondary" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="45, 100" stroke-dashoffset="-35" stroke-width="6"></path>
+<path class="text-tertiary" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="20, 100" stroke-dashoffset="-80" stroke-width="6"></path>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-2xl font-bold">28</span>
+<span class="text-[10px] text-on-surface-variant font-bold uppercase tracking-wider">Pets</span>
+</div>
+</div>
+<div class="mt-6 grid grid-cols-2 gap-2">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-primary"></div>
+<span class="text-xs font-medium">Beginner (35%)</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-secondary"></div>
+<span class="text-xs font-medium">Explorer (45%)</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-tertiary"></div>
+<span class="text-xs font-medium">Master (20%)</span>
+</div>
+</div>
+</div>
+<!-- Charts Section 2: Behavior Log -->
+<div class="md:col-span-4 glass-card p-6 rounded-3xl">
+<h3 class="font-headline-md text-on-background mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary">timeline</span>
+                    Behavior Log
+                </h3>
+<div class="space-y-6 relative before:absolute before:left-[11px] before:top-2 before:bottom-2 before:w-[2px] before:bg-outline-variant/30">
+<div class="relative pl-8">
+<div class="absolute left-0 top-1 w-6 h-6 rounded-full bg-tertiary-container flex items-center justify-center z-10 border-2 border-white">
+<span class="material-symbols-outlined text-tertiary text-xs">check</span>
+</div>
+<p class="text-xs text-on-surface-variant">10:45 AM</p>
+<h4 class="font-label-bold text-sm">Classroom Collaboration</h4>
+<p class="text-xs text-on-surface-variant italic">Team 'Starters' shared resources.</p>
+</div>
+<div class="relative pl-8">
+<div class="absolute left-0 top-1 w-6 h-6 rounded-full bg-secondary-container flex items-center justify-center z-10 border-2 border-white">
+<span class="material-symbols-outlined text-secondary text-xs">celebration</span>
+</div>
+<p class="text-xs text-on-surface-variant">09:30 AM</p>
+<h4 class="font-label-bold text-sm">Morning Streak!</h4>
+<p class="text-xs text-on-surface-variant italic">15 students logged in before bell.</p>
+</div>
+<div class="relative pl-8">
+<div class="absolute left-0 top-1 w-6 h-6 rounded-full bg-primary-container flex items-center justify-center z-10 border-2 border-white">
+<span class="material-symbols-outlined text-primary text-xs">bolt</span>
+</div>
+<p class="text-xs text-on-surface-variant">Yesterday</p>
+<h4 class="font-label-bold text-sm">Rapid Quiz Boost</h4>
+<p class="text-xs text-on-surface-variant italic">Average score increased by 15%.</p>
+</div>
+</div>
+</div>
+<!-- Class Mood Distribution -->
+<div class="md:col-span-8 glass-card p-6 rounded-3xl overflow-hidden">
+<div class="flex justify-between items-center mb-8">
+<h3 class="font-headline-md text-on-background flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">mood</span>
+                        Habitat Mood Distribution
+                    </h3>
+<div class="text-xs font-bold text-on-surface-variant bg-surface-container px-3 py-1 rounded-full uppercase">Last 7 Days</div>
+</div>
+<div class="flex items-end justify-between h-40 gap-4">
+<div class="flex-1 flex flex-col items-center gap-2 group">
+<div class="w-full bg-tertiary-container rounded-t-xl h-4/5 relative group-hover:h-full transition-all duration-300" style="height: 0px; transition: height 1s cubic-bezier(0.34, 1.56, 0.64, 1);">
+<div class="progress-stripe absolute inset-0 rounded-t-xl opacity-20"></div>
+</div>
+<span class="material-symbols-outlined text-tertiary">sentiment_very_satisfied</span>
+<span class="text-[10px] font-bold">MON</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2 group">
+<div class="w-full bg-secondary-container rounded-t-xl h-3/5 group-hover:h-[70%] transition-all duration-300" style="height: 0px; transition: height 1s cubic-bezier(0.34, 1.56, 0.64, 1);"></div>
+<span class="material-symbols-outlined text-secondary">sentiment_satisfied</span>
+<span class="text-[10px] font-bold">TUE</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2 group">
+<div class="w-full bg-tertiary-container rounded-t-xl h-full relative" style="height: 0px; transition: height 1s cubic-bezier(0.34, 1.56, 0.64, 1);">
+<div class="progress-stripe absolute inset-0 rounded-t-xl opacity-20"></div>
+</div>
+<span class="material-symbols-outlined text-tertiary">sentiment_very_satisfied</span>
+<span class="text-[10px] font-bold">WED</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2 group">
+<div class="w-full bg-primary-container rounded-t-xl h-4/5 group-hover:h-full transition-all duration-300" style="height: 0px; transition: height 1s cubic-bezier(0.34, 1.56, 0.64, 1);"></div>
+<span class="material-symbols-outlined text-primary">sentiment_neutral</span>
+<span class="text-[10px] font-bold">THU</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2 group">
+<div class="w-full bg-tertiary-container rounded-t-xl h-[85%] group-hover:h-full transition-all duration-300" style="height: 0px; transition: height 1s cubic-bezier(0.34, 1.56, 0.64, 1);"></div>
+<span class="material-symbols-outlined text-tertiary">sentiment_very_satisfied</span>
+<span class="text-[10px] font-bold">FRI</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2 group opacity-40">
+<div class="w-full bg-outline-variant rounded-t-xl h-1/5" style="height: 0px; transition: height 1s cubic-bezier(0.34, 1.56, 0.64, 1);"></div>
+<span class="material-symbols-outlined">bedtime</span>
+<span class="text-[10px] font-bold">SAT</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2 group opacity-40">
+<div class="w-full bg-outline-variant rounded-t-xl h-1/5" style="height: 0px; transition: height 1s cubic-bezier(0.34, 1.56, 0.64, 1);"></div>
+<span class="material-symbols-outlined">bedtime</span>
+<span class="text-[10px] font-bold">SUN</span>
+</div>
+</div>
+</div>
+<!-- Action Prompt Card -->
+<div class="md:col-span-4 bg-secondary p-8 rounded-3xl text-on-secondary relative overflow-hidden flex flex-col justify-between shadow-[0_12px_24px_-8px_rgba(0,93,184,0.5)]">
+<div class="absolute top-0 right-0 -mr-8 -mt-8 opacity-10">
+<span class="material-symbols-outlined text-[160px]">insights</span>
+</div>
+<div>
+<h3 class="font-headline-md text-2xl mb-2">Deep Insights</h3>
+<p class="text-sm text-secondary-fixed mb-6">Want to see why engagement peaked on Wednesday? Generate a custom AI report for your class.</p>
+</div>
+<button class="w-full py-4 bg-white text-secondary rounded-2xl font-bold hover:scale-105 transition-transform active:scale-95 shadow-xl">
+                    Generate Report
+                </button>
+</div>
+</div>
+</main>
+<!-- Mobile BottomNavBar -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full bg-surface-container-low/95 backdrop-blur-xl border-t border-white/20 flex justify-around py-3 z-50">
+<button class="flex flex-col items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined">school</span>
+<span class="text-[10px] font-bold">Class</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-secondary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">leaderboard</span>
+<span class="text-[10px] font-bold">Stats</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined">group</span>
+<span class="text-[10px] font-bold">Students</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined">psychology</span>
+<span class="text-[10px] font-bold">Mind</span>
+</button>
+</nav>
+<!-- Atmospheric Micro-interactions -->
+<script>
+        // Simple hover effect for leaderboard rows
+        document.querySelectorAll('.leaderboard-row').forEach(row => {
+            row.addEventListener('mouseenter', () => {
+                row.style.transform = 'translateX(8px)';
+            });
+            row.addEventListener('mouseleave', () => {
+                row.style.transform = 'translateX(0)';
+            });
+        });
+
+        // Simulating loading data animation on bars
+        window.addEventListener('load', () => {
+            const bars = document.querySelectorAll('.flex-1.flex.flex-col .w-full');
+            bars.forEach((bar, index) => {
+                const originalHeight = bar.style.height || getComputedStyle(bar).height;
+                bar.style.height = '0';
+                setTimeout(() => {
+                    bar.style.transition = 'height 1s cubic-bezier(0.34, 1.56, 0.64, 1)';
+                    bar.style.height = originalHeight;
+                }, 100 * index);
+            });
+        });
+    </script>
+
+
+</body></html>
