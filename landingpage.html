@@ -311,6 +311,12 @@
       font-weight: 600;
       font-size: 14px;
     }
+    .privacy-note {
+      margin: 12px 0 0;
+      color: #4d5b72;
+      font-size: 13px;
+      line-height: 1.5;
+    }
     .subscribe-proof {
       margin-top: 14px;
       display: flex;
@@ -783,77 +789,14 @@
         </div>
       </form>
       <div id="message" class="note" aria-live="polite"></div>
-      <div class="subscribe-proof">
-        <div class="proof-box" aria-label="Subscriber proof">
-          <div class="proof-avatars">
-            <span class="proof-avatar a1" aria-hidden="true"><img src="assets/avatars/屏幕截图 2026-05-27 122647.png" alt=""></span>
-            <span class="proof-avatar a2" aria-hidden="true"><img src="assets/avatars/屏幕截图 2026-05-27 122701.png" alt=""></span>
-            <span class="proof-avatar a3" aria-hidden="true"><img src="assets/avatars/屏幕截图 2026-05-27 122713.png" alt=""></span>
-            <span class="proof-avatar a4" aria-hidden="true"><img src="assets/avatars/屏幕截图 2026-05-27 122725.png" alt=""></span>
-            <span class="proof-avatar a5" aria-hidden="true"><img src="assets/avatars/屏幕截图 2026-05-27 122731.png" alt=""></span>
-            <span class="proof-avatar more" aria-hidden="true">+995</span>
-          </div>
-          <span class="proof-text">Subscribed and loved by 1000+ users</span>
-        </div>
-      </div>
-    </section>
-
-    <section id="voices" class="voices-wrap">
-      <h2>What Users Are Saying</h2>
-      <div class="voices-card">
-        <div class="voices-top">
-          <img id="voiceAvatar" class="voices-avatar" src="assets/avatars/屏幕截图 2026-05-27 122647.png" alt="User avatar">
-          <div class="voices-quote">“”</div>
-        </div>
-        <p id="voiceText" class="voices-text">“Pupil Pals makes class management feel effortless, and the pet growth system keeps my students genuinely excited every day.”</p>
-        <p id="voiceName" class="voices-name">Alicia</p>
-        <p id="voiceRole" class="voices-role">Grade 4 Homeroom Teacher</p>
-      </div>
-      <div class="voices-nav" aria-label="User voice selector">
-        <button class="voice-dot active" data-voice="0"><img class="voice-dot" src="assets/avatars/屏幕截图 2026-05-27 122647.png" alt="Alicia"></button>
-        <button class="voice-dot" data-voice="1"><img class="voice-dot" src="assets/avatars/屏幕截图 2026-05-27 122701.png" alt="David"></button>
-        <button class="voice-dot" data-voice="2"><img class="voice-dot" src="assets/avatars/屏幕截图 2026-05-27 122713.png" alt="Mina"></button>
-        <button class="voice-dot" data-voice="3"><img class="voice-dot" src="assets/avatars/屏幕截图 2026-05-27 122725.png" alt="Ken"></button>
-        <button class="voice-dot" data-voice="4"><img class="voice-dot" src="assets/avatars/屏幕截图 2026-05-27 122731.png" alt="Erin"></button>
-      </div>
+      <p class="privacy-note">Pupil Pals is in active development. This prototype keeps your email in this browser only; it is not sent to us yet.</p>
     </section>
 
     <footer>
-      <p>Pupil Pals is currently in active development. Partner with us early to shape the product roadmap.</p>
+      <p>We are seeking 10 elementary homeroom teachers to help shape the first Pupil Pals pilot.</p>
     </footer>
   </div>
 
-  <div class="quick-actions" aria-label="Quick actions">
-    <a class="quick-btn" href="#top">Back to Top</a>
-    <a id="quickSubscribe" class="quick-btn" href="#subscribe">Join the Pilot</a>
-    <button id="contactToggle" class="quick-btn" type="button">Contact Us</button>
-    <button id="feedbackToggle" class="quick-btn" type="button">Feedback</button>
-    <div id="contactPanel" class="contact-panel" aria-label="Contact widget">
-      <div class="contact-head">
-        <h3>Contact Us</h3>
-        <button id="contactClose" class="feedback-close" type="button" aria-label="Close contact">×</button>
-      </div>
-      <div class="contact-links">
-        <a class="contact-link" href="https://x.com/" target="_blank" rel="noopener noreferrer">X</a>
-        <a class="contact-link" href="https://facebook.com/" target="_blank" rel="noopener noreferrer">Facebook</a>
-        <a class="contact-link" href="https://discord.com/" target="_blank" rel="noopener noreferrer">Discord</a>
-        <a class="contact-link" href="https://telegram.org/" target="_blank" rel="noopener noreferrer">Telegram</a>
-      </div>
-      <div class="contact-email"><strong>Email:</strong> contact@your-domain.com (placeholder)</div>
-    </div>
-    <div id="feedbackPanel" class="feedback-panel" aria-label="Feedback widget">
-      <div class="feedback-head">
-        <h3>Quick Feedback</h3>
-        <button id="feedbackClose" class="feedback-close" type="button" aria-label="Close feedback">×</button>
-      </div>
-      <textarea id="feedbackText" placeholder="Share a suggestion or bug report..."></textarea>
-      <input id="feedbackEmail" class="optional-email" type="email" placeholder="Your email (optional)">
-      <div class="feedback-actions">
-        <button id="feedbackSend" class="btn btn-primary" type="button">Send</button>
-      </div>
-      <div id="feedbackMessage" class="feedback-note" aria-live="polite"></div>
-    </div>
-  </div>
   <div id="imageLightbox" class="image-lightbox" aria-label="Full image preview">
     <div class="lightbox-inner">
       <button id="lightboxClose" class="lightbox-close" type="button" aria-label="Close image preview">×</button>
@@ -866,26 +809,9 @@
       var form = document.getElementById('subscribeForm');
       var emailInput = document.getElementById('email');
       var message = document.getElementById('message');
-      var subscribeSection = document.getElementById('subscribe');
-      var quickSubscribe = document.getElementById('quickSubscribe');
-      var contactToggle = document.getElementById('contactToggle');
-      var contactPanel = document.getElementById('contactPanel');
-      var contactClose = document.getElementById('contactClose');
-      var feedbackToggle = document.getElementById('feedbackToggle');
-      var feedbackPanel = document.getElementById('feedbackPanel');
-      var feedbackText = document.getElementById('feedbackText');
-      var feedbackEmail = document.getElementById('feedbackEmail');
-      var feedbackSend = document.getElementById('feedbackSend');
-      var feedbackClose = document.getElementById('feedbackClose');
-      var feedbackMessage = document.getElementById('feedbackMessage');
       var heroPreview = document.getElementById('heroPreview');
       var imageLightbox = document.getElementById('imageLightbox');
       var lightboxClose = document.getElementById('lightboxClose');
-      var voiceAvatar = document.getElementById('voiceAvatar');
-      var voiceText = document.getElementById('voiceText');
-      var voiceName = document.getElementById('voiceName');
-      var voiceRole = document.getElementById('voiceRole');
-      var voiceDots = document.querySelectorAll('.voice-dot[data-voice]');
       var previewGroups = document.querySelectorAll('.preview-group[data-group]');
       var previewConfig = {
         main: {
@@ -923,38 +849,6 @@
         }
       };
       var previewState = {};
-      var voiceList = [
-        {
-          avatar: 'assets/avatars/屏幕截图 2026-05-27 122647.png',
-          text: '“Pupil Pals makes class management feel effortless, and the pet growth system keeps my students genuinely excited every day.”',
-          name: 'Alicia',
-          role: 'Grade 4 Homeroom Teacher'
-        },
-        {
-          avatar: 'assets/avatars/屏幕截图 2026-05-27 122701.png',
-          text: '“I can track classroom behavior fast, and students stay motivated because their pets evolve with real progress.”',
-          name: 'David',
-          role: 'School Operations Lead'
-        },
-        {
-          avatar: 'assets/avatars/屏幕截图 2026-05-27 122713.png',
-          text: '“The pet-raising journey is the hook. It turns daily tasks into a challenge students actually want to complete.”',
-          name: 'Mina',
-          role: 'Curriculum Coordinator'
-        },
-        {
-          avatar: 'assets/avatars/屏幕截图 2026-05-27 122725.png',
-          text: '“Parents also love it because they can clearly see behavior improvements and class participation over time.”',
-          name: 'Ken',
-          role: 'Primary School Principal'
-        },
-        {
-          avatar: 'assets/avatars/屏幕截图 2026-05-27 122731.png',
-          text: '“Pupil Pals combines practical management tools with emotional engagement, and that balance is hard to find.”',
-          name: 'Erin',
-          role: 'Education Product Advisor'
-        }
-      ];
 
       form.addEventListener('submit', function (event) {
         event.preventDefault();
@@ -979,77 +873,10 @@
           localStorage.setItem(key, JSON.stringify(current));
         }
 
-        message.textContent = 'Thanks. You are on the early access list.';
+        message.textContent = 'Thanks. Your interest is saved in this browser for this prototype.';
         message.style.color = '#00531d';
         form.reset();
       });
-
-      feedbackToggle.addEventListener('click', function () {
-        contactPanel.classList.remove('open');
-        feedbackPanel.classList.toggle('open');
-      });
-      feedbackClose.addEventListener('click', function () {
-        feedbackPanel.classList.remove('open');
-      });
-      contactToggle.addEventListener('click', function () {
-        feedbackPanel.classList.remove('open');
-        contactPanel.classList.toggle('open');
-      });
-      contactClose.addEventListener('click', function () {
-        contactPanel.classList.remove('open');
-      });
-
-      feedbackSend.addEventListener('click', function () {
-        var text = feedbackText.value.trim();
-        if (!text) {
-          feedbackMessage.textContent = 'Please enter your feedback first.';
-          return;
-        }
-        var key = 'pupil_pals_feedback';
-        var current = [];
-        try {
-          current = JSON.parse(localStorage.getItem(key) || '[]');
-        } catch (e) {
-          current = [];
-        }
-        current.push({
-          content: text,
-          email: feedbackEmail.value.trim() || null,
-          createdAt: new Date().toISOString()
-        });
-        localStorage.setItem(key, JSON.stringify(current));
-        feedbackMessage.textContent = 'Thanks for your feedback.';
-        feedbackText.value = '';
-        feedbackEmail.value = '';
-      });
-
-      quickSubscribe.addEventListener('click', function () {
-        setTimeout(function () {
-          subscribeSection.classList.remove('subscribe-focus');
-          void subscribeSection.offsetWidth;
-          subscribeSection.classList.add('subscribe-focus');
-          emailInput.focus();
-        }, 120);
-      });
-
-      subscribeSection.addEventListener('animationend', function () {
-        subscribeSection.classList.remove('subscribe-focus');
-      });
-
-      for (var i = 0; i < voiceDots.length; i++) {
-        voiceDots[i].addEventListener('click', function () {
-          var index = Number(this.getAttribute('data-voice'));
-          var item = voiceList[index];
-          voiceAvatar.src = item.avatar;
-          voiceText.textContent = item.text;
-          voiceName.textContent = item.name;
-          voiceRole.textContent = item.role;
-          for (var j = 0; j < voiceDots.length; j++) {
-            voiceDots[j].classList.remove('active');
-          }
-          this.classList.add('active');
-        });
-      }
 
       heroPreview.addEventListener('click', function () {
         imageLightbox.classList.add('open');
