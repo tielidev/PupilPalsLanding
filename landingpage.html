@@ -661,17 +661,43 @@
         position: static;
         transform: none;
         width: 100%;
-        display: flex;
-        justify-content: space-between;
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 4px;
         margin-bottom: 16px;
       }
-      .right-nav a { display: inline-block; }
+      .right-nav > a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 0;
+        padding: 8px 6px;
+        font-size: 14px;
+        text-align: center;
+      }
+      .right-nav .subnav { display: none; }
     }
 
     @media (max-width: 640px) {
+      .layout { padding: 18px 16px 56px; }
       .feature-grid { grid-template-columns: 1fr; }
       .subscribe-wrap {
         grid-template-columns: 1fr;
+      }
+      .right-nav { margin-bottom: 12px; }
+      .right-nav > a { font-size: 12px; }
+      .quick-actions {
+        position: static;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+        padding: 0 16px 24px;
+      }
+      .quick-btn { width: 100%; }
+      .feedback-panel,
+      .contact-panel {
+        width: 100%;
+        grid-column: 1 / -1;
       }
     }
   </style>
